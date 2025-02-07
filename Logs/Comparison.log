@@ -1,0 +1,346 @@
+2025-02-07 09:46:05,189 - INFO - Starting main comparison process.
+2025-02-07 09:46:05,191 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 09:46:05,634 - INFO - Sheets loaded successfully.
+2025-02-07 09:46:05,690 - ERROR - Error calculating totals: index 0 is out of bounds for axis 0 with size 0
+2025-02-07 09:46:05,690 - ERROR - Error in main comparison process: index 0 is out of bounds for axis 0 with size 0
+2025-02-07 09:50:19,152 - INFO - Starting main comparison process.
+2025-02-07 09:50:19,153 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 09:50:19,575 - INFO - Sheets loaded successfully.
+2025-02-07 09:50:19,633 - ERROR - Error calculating totals: index 0 is out of bounds for axis 0 with size 0
+2025-02-07 09:50:19,633 - ERROR - Error in main comparison process: index 0 is out of bounds for axis 0 with size 0
+2025-02-07 09:52:35,856 - INFO - Starting main comparison process.
+2025-02-07 09:52:35,857 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 09:52:36,300 - INFO - Sheets loaded successfully.
+2025-02-07 09:52:36,302 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 09:52:36,355 - INFO - Total amount for client UBER WAV TRANSIT: 500
+2025-02-07 09:52:36,355 - INFO - Total calculated mamount:500
+2025-02-07 09:52:36,357 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 09:52:36,367 - INFO - Total amount for client UBER WAV TRANSIT: 820
+2025-02-07 09:52:36,367 - INFO - Total calculated mamount:820
+2025-02-07 09:52:36,367 - INFO - Comparing Totals between previous and latest sheets.
+2025-02-07 09:52:36,367 - ERROR - Error comparing totals: 'int' object has no attribute 'merge'
+2025-02-07 09:52:36,368 - ERROR - Error in main comparison process: 'int' object has no attribute 'merge'
+2025-02-07 10:38:18,885 - INFO - Starting main comparison process.
+2025-02-07 10:38:18,886 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 10:38:19,376 - INFO - Sheets loaded successfully.
+2025-02-07 10:38:19,430 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 10:38:19,455 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 10:38:19,456 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 10:38:19,457 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 10:38:19,469 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 10:38:19,469 - INFO - Total calculated mamount:32997.7475
+2025-02-07 10:38:19,470 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 10:38:19,470 - INFO - Totals comparison completed.
+2025-02-07 10:38:19,480 - INFO - Totals DF:      PREVIOUS      LATEST     CHANGE
+0  31324.7523  32997.7475  1672.9952
+2025-02-07 11:14:10,198 - INFO - Starting main comparison process.
+2025-02-07 11:14:10,198 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:14:10,630 - INFO - Sheets loaded successfully.
+2025-02-07 11:14:10,632 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:14:10,641 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:14:10,641 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:14:10,643 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:14:10,658 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:14:10,658 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:14:10,658 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:14:10,659 - INFO - Totals comparison completed.
+2025-02-07 11:14:10,659 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:14:10,717 - ERROR - Error comparing deductions: 'HTOTALREV_LATEST'
+2025-02-07 11:14:10,717 - ERROR - Error in main comparison process: 'HTOTALREV_LATEST'
+2025-02-07 11:18:51,000 - INFO - Starting main comparison process.
+2025-02-07 11:18:51,001 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:18:51,462 - INFO - Sheets loaded successfully.
+2025-02-07 11:18:51,465 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:18:51,474 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:18:51,474 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:18:51,476 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:18:51,486 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:18:51,487 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:18:51,487 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:18:51,488 - INFO - Totals comparison completed.
+2025-02-07 11:18:51,488 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:18:51,534 - INFO - HTOTALREV comparison completed.
+2025-02-07 11:18:51,541 - INFO - HTOTAL_REV DF:                          PARTNER   PREVIOUS     LATEST     CHANGE
+0                 BEYOND EXPRESS  1631.5000   566.6600 -1064.8400
+4                 CIRCLE TRANSIT  5817.1643  6638.9980   821.8337
+8   DEAN LOGISTICS SOLUTIONS LLC  1239.9700  1245.8500     5.8800
+12            DIRECT TRANSIT LLC  6077.6120  7408.8200  1331.2080
+16            Q-TELL TRANSIT LLC  3421.9960  2548.1924  -873.8036
+2025-02-07 11:29:43,117 - INFO - Starting main comparison process.
+2025-02-07 11:29:43,118 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:29:43,534 - INFO - Sheets loaded successfully.
+2025-02-07 11:29:43,537 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:29:43,549 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:29:43,549 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:29:43,551 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:29:43,562 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:29:43,563 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:29:43,563 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:29:43,564 - INFO - Totals comparison completed.
+2025-02-07 11:29:43,564 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:29:43,569 - INFO - HTOTALREV comparison completed.
+2025-02-07 11:29:43,569 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:29:43,570 - ERROR - Error comparing Lift Lease: "None of [Index(['PARTNER', 'LIFT LEASE TOTAL'], dtype='object')] are in the [columns]"
+2025-02-07 11:29:43,570 - ERROR - Error in main comparison process: "None of [Index(['PARTNER', 'LIFT LEASE TOTAL'], dtype='object')] are in the [columns]"
+2025-02-07 11:30:44,109 - INFO - Starting main comparison process.
+2025-02-07 11:30:44,110 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:30:44,525 - INFO - Sheets loaded successfully.
+2025-02-07 11:30:44,527 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:30:44,537 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:30:44,538 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:30:44,539 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:30:44,549 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:30:44,549 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:30:44,550 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:30:44,550 - INFO - Totals comparison completed.
+2025-02-07 11:30:44,551 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:30:44,557 - INFO - HTOTALREV comparison completed.
+2025-02-07 11:30:44,557 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:30:44,562 - INFO - Lift Lease comparison completed.
+2025-02-07 11:30:44,573 - INFO - Lift Lease DF:                            PARTNER  PREVIOUS  LATEST  CHANGE
+0                       AMY WALKER       0.0     0.0     0.0
+1                   BEYOND EXPRESS     618.0   618.0     0.0
+2               CASTLE TRANSIT LLC       0.0     0.0     0.0
+3                   CIRCLE TRANSIT       0.0     0.0     0.0
+19    DEAN LOGISTICS SOLUTIONS LLC     618.0   618.0     0.0
+20      DIJUANS TRANSPORTATION LLC       0.0     0.0     0.0
+21              DIRECT TRANSIT LLC     614.0   614.0     0.0
+37                  FULTON TRANSIT       0.0     0.0     0.0
+38                 GET YOU THERE08       0.0     0.0     0.0
+39  JASEENAS TRANSPORTATION SERVIC       0.0     0.0     0.0
+40                   JASTAR GORDON       0.0     0.0     0.0
+41                 JERQWANA HUGHES       0.0     0.0     0.0
+42          ON TIME CONNECTION LLC       0.0     0.0     0.0
+43    PLEASANT HELP TRANSPORTATION       0.0     0.0     0.0
+44              Q-TELL TRANSIT LLC     460.5   460.5     0.0
+60       WHITEHEAD ENTERPRISES LLC       0.0     0.0     0.0
+2025-02-07 11:35:52,320 - INFO - Starting main comparison process.
+2025-02-07 11:35:52,321 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:35:52,733 - INFO - Sheets loaded successfully.
+2025-02-07 11:35:52,736 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:35:52,746 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:35:52,746 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:35:52,747 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:35:52,756 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:35:52,757 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:35:52,757 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:35:52,758 - INFO - Totals comparison completed.
+2025-02-07 11:35:52,759 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:35:52,765 - INFO - HTOTALREV comparison completed.
+2025-02-07 11:35:52,766 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:35:52,772 - INFO - Lift Lease comparison completed.
+2025-02-07 11:35:52,782 - INFO - Lift Lease DF:                          PARTNER  PREVIOUS  LATEST  CHANGE
+0                 BEYOND EXPRESS     618.0   618.0     0.0
+1                 CIRCLE TRANSIT       0.0     0.0     0.0
+17  DEAN LOGISTICS SOLUTIONS LLC     618.0   618.0     0.0
+18            DIRECT TRANSIT LLC     614.0   614.0     0.0
+34            Q-TELL TRANSIT LLC     460.5   460.5     0.0
+2025-02-07 11:38:00,545 - INFO - Starting main comparison process.
+2025-02-07 11:38:00,545 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:38:00,968 - INFO - Sheets loaded successfully.
+2025-02-07 11:38:00,970 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:38:00,980 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:38:00,981 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:38:00,981 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:38:00,994 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:38:00,994 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:38:00,994 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:38:00,995 - INFO - Totals comparison completed.
+2025-02-07 11:38:00,995 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:38:01,000 - INFO - HTOTALREV comparison completed.
+2025-02-07 11:38:01,001 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:38:01,004 - ERROR - Error comparing Lift Lease: 'Series' object has no attribute 'merge'
+2025-02-07 11:38:01,004 - ERROR - Error in main comparison process: 'Series' object has no attribute 'merge'
+2025-02-07 11:40:10,946 - INFO - Starting main comparison process.
+2025-02-07 11:40:10,947 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:40:11,355 - INFO - Sheets loaded successfully.
+2025-02-07 11:40:11,357 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:40:11,369 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:40:11,370 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:40:11,371 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:40:11,379 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:40:11,379 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:40:11,379 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:40:11,380 - INFO - Totals comparison completed.
+2025-02-07 11:40:11,380 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:40:11,387 - INFO - HTOTALREV comparison completed.
+2025-02-07 11:40:11,388 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:40:11,441 - INFO - Lift Lease comparison completed.
+2025-02-07 11:40:11,448 - INFO - Lift Lease DF:                         PARTNER  PREVIOUS  LATEST  CHANGE
+0                BEYOND EXPRESS     618.0   618.0     0.0
+1                CIRCLE TRANSIT    1236.0  1236.0     0.0
+2  DEAN LOGISTICS SOLUTIONS LLC     618.0   618.0     0.0
+3            DIRECT TRANSIT LLC    1228.0  1228.0     0.0
+4            Q-TELL TRANSIT LLC     460.5   460.5     0.0
+2025-02-07 11:45:52,244 - INFO - Starting main comparison process.
+2025-02-07 11:45:52,244 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:45:52,650 - INFO - Sheets loaded successfully.
+2025-02-07 11:45:52,652 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:45:52,662 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:45:52,662 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:45:52,663 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:45:52,675 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:45:52,675 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:45:52,675 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:45:52,676 - INFO - Totals comparison completed.
+2025-02-07 11:45:52,676 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:45:52,683 - INFO - HTOTALREV comparison completed.
+2025-02-07 11:45:52,683 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:45:52,692 - INFO - Lift Lease comparison completed.
+2025-02-07 11:45:52,692 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:45:52,745 - INFO - Violation comparison completed.
+2025-02-07 11:45:52,750 - INFO - Violations DF:                         PARTNER  PREVIOUS  LATEST  CHANGE
+0                BEYOND EXPRESS         0       0       0
+1                CIRCLE TRANSIT       500     595      95
+2  DEAN LOGISTICS SOLUTIONS LLC         0       0       0
+3            DIRECT TRANSIT LLC         0     130     130
+4            Q-TELL TRANSIT LLC         0      95      95
+2025-02-07 11:56:49,370 - INFO - Starting main comparison process.
+2025-02-07 11:56:49,371 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 11:56:49,802 - INFO - Sheets loaded successfully.
+2025-02-07 11:56:49,804 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:56:49,814 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 11:56:49,815 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 11:56:49,817 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 11:56:49,828 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 11:56:49,828 - INFO - Total calculated mamount:32997.7475
+2025-02-07 11:56:49,828 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 11:56:49,829 - INFO - Totals comparison completed.
+2025-02-07 11:56:49,829 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 11:56:49,835 - INFO - HTOTALREV comparison completed.
+2025-02-07 11:56:49,835 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:56:49,843 - INFO - Lift Lease comparison completed.
+2025-02-07 11:56:49,844 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 11:56:49,850 - INFO - Violation comparison completed.
+2025-02-07 11:56:49,850 - INFO - Comparing operators between previous and latest sheets.
+2025-02-07 11:56:49,855 - INFO - Operator comparison completed.
+2025-02-07 11:56:49,859 - INFO - Operator Changes DF: Empty DataFrame
+Columns: [Change]
+Index: []
+2025-02-07 12:03:57,989 - INFO - Starting main comparison process.
+2025-02-07 12:03:57,989 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 12:03:58,406 - INFO - Sheets loaded successfully.
+2025-02-07 12:03:58,409 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 12:03:58,419 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 12:03:58,419 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 12:03:58,421 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 12:03:58,432 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 12:03:58,432 - INFO - Total calculated mamount:32997.7475
+2025-02-07 12:03:58,432 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 12:03:58,433 - INFO - Totals comparison completed.
+2025-02-07 12:03:58,433 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 12:03:58,439 - INFO - HTOTALREV comparison completed.
+2025-02-07 12:03:58,440 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 12:03:58,448 - INFO - Lift Lease comparison completed.
+2025-02-07 12:03:58,449 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 12:03:58,456 - INFO - Violation comparison completed.
+2025-02-07 12:03:58,456 - INFO - Comparing operators between previous and latest sheets.
+2025-02-07 12:03:58,461 - INFO - Operator comparison completed.
+2025-02-07 12:03:58,462 - ERROR - Error in main comparison process: 'Added'
+2025-02-07 12:04:44,517 - INFO - Starting main comparison process.
+2025-02-07 12:04:44,518 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 12:04:44,937 - INFO - Sheets loaded successfully.
+2025-02-07 12:04:44,939 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 12:04:44,950 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 12:04:44,950 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 12:04:44,951 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 12:04:44,963 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 12:04:44,963 - INFO - Total calculated mamount:32997.7475
+2025-02-07 12:04:44,964 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 12:04:44,964 - INFO - Totals comparison completed.
+2025-02-07 12:04:44,965 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 12:04:44,971 - INFO - HTOTALREV comparison completed.
+2025-02-07 12:04:44,971 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 12:04:44,980 - INFO - Lift Lease comparison completed.
+2025-02-07 12:04:44,981 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 12:04:44,988 - INFO - Violation comparison completed.
+2025-02-07 12:04:44,988 - INFO - Comparing operators between previous and latest sheets.
+2025-02-07 12:04:44,995 - INFO - Operator comparison completed.
+2025-02-07 12:04:44,995 - INFO - Comparing operators between previous and latest sheets.
+2025-02-07 12:04:44,999 - INFO - Operator comparison completed.
+2025-02-07 12:04:45,001 - INFO - Operator Changes DF:Empty DataFrame
+Columns: [Operator Name, Partner, Change]
+Index: []
+2025-02-07 13:17:22,342 - INFO - Starting main comparison process.
+2025-02-07 13:17:22,343 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 13:17:22,766 - INFO - Sheets loaded successfully.
+2025-02-07 13:17:22,768 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 13:17:22,778 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 13:17:22,778 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 13:17:22,780 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 13:17:22,792 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 13:17:22,792 - INFO - Total calculated mamount:32997.7475
+2025-02-07 13:17:22,792 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 13:17:22,793 - INFO - Totals comparison completed.
+2025-02-07 13:17:22,793 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 13:17:22,798 - INFO - HTOTALREV comparison completed.
+2025-02-07 13:17:22,799 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 13:17:22,808 - INFO - Lift Lease comparison completed.
+2025-02-07 13:17:22,808 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 13:17:22,815 - INFO - Violation comparison completed.
+2025-02-07 13:17:22,815 - INFO - Comparing operators between previous and latest sheets.
+2025-02-07 13:17:22,820 - INFO - Operator comparison completed.
+2025-02-07 13:17:22,821 - INFO - Comparing weeks between previous and latest sheets.
+2025-02-07 13:17:22,827 - INFO - Week1 comparison completed.
+2025-02-07 13:17:22,828 - INFO - Comparing weeks between previous and latest sheets.
+2025-02-07 13:17:22,830 - INFO - Week1 comparison completed.
+2025-02-07 13:17:22,838 - INFO - Summary DF:                  Metric    Previous      Latest  Difference     Change
+0       Acceptance Rate    4.537155    4.822849    0.285694  Increased
+1     Cancellation Rate    0.117236    0.107975   -0.009261  Decreased
+2          Utilization%    4.366567    4.370084    0.003517  Increased
+3  Payable Normal Hours  445.440000  423.850000  -21.590000  Decreased
+4   Payable Bonus Hours  135.390000  133.800000   -1.590000  Decreased
+2025-02-07 13:28:59,794 - INFO - Starting main comparison process.
+2025-02-07 13:28:59,795 - INFO - Loading sheets from the provided Excel files.
+2025-02-07 13:29:00,237 - INFO - Sheets loaded successfully.
+2025-02-07 13:29:00,239 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 13:29:00,248 - INFO - Total amount for client UBER WAV TRANSIT: 31324.752299999996
+2025-02-07 13:29:00,249 - INFO - Total calculated mamount:31324.752299999996
+2025-02-07 13:29:00,251 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-07 13:29:00,262 - INFO - Total amount for client UBER WAV TRANSIT: 32997.7475
+2025-02-07 13:29:00,262 - INFO - Total calculated mamount:32997.7475
+2025-02-07 13:29:00,263 - INFO - Comparing Totals between previous and latest values.
+2025-02-07 13:29:00,263 - INFO - Totals comparison completed.
+2025-02-07 13:29:00,264 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-07 13:29:00,272 - INFO - HTOTALREV comparison completed.
+2025-02-07 13:29:00,272 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 13:29:00,280 - INFO - Lift Lease comparison completed.
+2025-02-07 13:29:00,280 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-07 13:29:00,287 - INFO - Violation comparison completed.
+2025-02-07 13:29:00,287 - INFO - Comparing operators between previous and latest sheets.
+2025-02-07 13:29:00,292 - INFO - Operator comparison completed.
+2025-02-07 13:29:00,293 - INFO - Comparing weeks between previous and latest sheets.
+2025-02-07 13:29:00,296 - INFO - Week1 comparison completed.
+2025-02-07 13:29:00,297 - INFO - Comparing weeks between previous and latest sheets.
+2025-02-07 13:29:00,299 - INFO - Week1 comparison completed.
+2025-02-07 13:29:00,306 - INFO - Summary DF:                  Metric    Previous      Latest  Difference     Change
+0       Acceptance Rate    4.537155    4.822849    0.285694  Increased
+1     Cancellation Rate    0.117236    0.107975   -0.009261  Decreased
+2          Utilization%    4.366567    4.370084    0.003517  Increased
+3  Payable Normal Hours  445.440000  423.850000  -21.590000  Decreased
+4   Payable Bonus Hours  135.390000  133.800000   -1.590000  Decreased
+2025-02-07 13:29:00,307 - INFO - Comparing weeks between previous and latest sheets.
+2025-02-07 13:29:00,309 - INFO - Week1 comparison completed.
+2025-02-07 13:29:00,310 - INFO - Comparing weeks between previous and latest sheets.
+2025-02-07 13:29:00,313 - INFO - Week1 comparison completed.
+2025-02-07 13:29:00,319 - INFO - Summary DF:                  Metric    Previous      Latest  Difference     Change
+0       Acceptance Rate    4.578711    4.890917    0.312206  Increased
+1     Cancellation Rate    0.079427    0.070929   -0.008497  Decreased
+2          Utilization%    4.512294    4.169738   -0.342555  Decreased
+3  Payable Normal Hours  405.880000  400.730000   -5.150000  Decreased
+4   Payable Bonus Hours  150.000000  182.450000   32.450000  Increased
+2025-02-07 13:29:00,495 - INFO - Applying formatting to sheet: TotalInvoicePayment.
+2025-02-07 13:29:00,497 - INFO - Formatting applied successfully to sheet: TotalInvoicePayment.
+2025-02-07 13:29:00,497 - INFO - Applying formatting to sheet: HTotalRevComparison.
+2025-02-07 13:29:00,499 - INFO - Formatting applied successfully to sheet: HTotalRevComparison.
+2025-02-07 13:29:00,500 - INFO - Applying formatting to sheet: LiftLeaseComparison.
+2025-02-07 13:29:00,503 - INFO - Formatting applied successfully to sheet: LiftLeaseComparison.
+2025-02-07 13:29:00,503 - INFO - Applying formatting to sheet: ViolationComparison.
+2025-02-07 13:29:00,506 - INFO - Formatting applied successfully to sheet: ViolationComparison.
+2025-02-07 13:29:00,506 - INFO - Applying formatting to sheet: OperatorChanges.
+2025-02-07 13:29:00,507 - INFO - Formatting applied successfully to sheet: OperatorChanges.
+2025-02-07 13:29:00,507 - INFO - Applying formatting to sheet: Week1Comparison.
+2025-02-07 13:29:00,510 - INFO - Formatting applied successfully to sheet: Week1Comparison.
+2025-02-07 13:29:00,511 - INFO - Applying formatting to sheet: Week2Comparison.
+2025-02-07 13:29:00,514 - INFO - Formatting applied successfully to sheet: Week2Comparison.
+2025-02-07 13:29:00,604 - INFO - Main comparison process completed successfully. File saved to ComparedResults\DIV2_Tables.xlsx.
