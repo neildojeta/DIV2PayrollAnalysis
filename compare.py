@@ -121,13 +121,18 @@ def compare_totals(sheet_previous, sheet_latest):
         # Ensure inputs are numeric
         if not isinstance(sheet_previous, (int, float)) or not isinstance(sheet_latest, (int, float)):
             raise TypeError("Both sheet_previous and sheet_latest must be numeric values.")
-
+        
         # Create a DataFrame to store results
         deductions_comparison = pd.DataFrame({
-            "PREVIOUS": [sheet_previous],
             "LATEST": [sheet_latest],
-            "CHANGE": [sheet_latest - sheet_previous]
-        })
+            "PREVIOUS": [sheet_previous],
+            "DIFFERENCE": [sheet_latest - sheet_previous]
+        }).round(2)
+
+        # Add CHANGE column based on the difference
+        deductions_comparison["CHANGE"] = deductions_comparison["DIFFERENCE"].apply(
+            lambda diff: "Increased" if diff > 0 else "Decreased" if diff < 0 else "No Change"
+        )
 
         logger.info("Totals comparison completed.")
         return deductions_comparison
@@ -149,12 +154,14 @@ def compare_htotalrev(sheet_previous, sheet_latest):
 
         # Calculate the change in the "Total Rev"
         comparison["CHANGE"] = comparison["Total Rev_LATEST"] - comparison["Total Rev_PREVIOUS"]
+        for col in ["Total Rev_LATEST", "Total Rev_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].round(2)
 
         # Prepare the final dataframe for comparison
-        deductions_comparison = comparison[["PARTNER NAME", "Total Rev_PREVIOUS", "Total Rev_LATEST", "CHANGE"]].drop_duplicates(subset="PARTNER NAME")
+        deductions_comparison = comparison[["PARTNER NAME", "Total Rev_LATEST", "Total Rev_PREVIOUS", "CHANGE"]].drop_duplicates(subset="PARTNER NAME")
 
         # Rename columns
-        deductions_comparison.columns = ["PARTNER", "PREVIOUS", "LATEST", "CHANGE"]
+        deductions_comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
 
         logger.info("HTOTALREV comparison completed.")
         return deductions_comparison
@@ -178,12 +185,14 @@ def compare_liftlease(sheet_previous, sheet_latest, htotalrev_df):
 
         # Calculate the change in the "LIFT LEASE TOTAL"
         comparison["CHANGE"] = comparison["LIFT LEASE TOTAL_LATEST"] - comparison["LIFT LEASE TOTAL_PREVIOUS"]
+        for col in ["LIFT LEASE TOTAL_LATEST", "LIFT LEASE TOTAL_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].round(2)
 
         # Prepare the final dataframe for comparison
-        deductions_comparison = comparison[["PARTNER", "LIFT LEASE TOTAL_PREVIOUS", "LIFT LEASE TOTAL_LATEST", "CHANGE"]].drop_duplicates(subset="PARTNER")
+        deductions_comparison = comparison[["PARTNER", "LIFT LEASE TOTAL_LATEST", "LIFT LEASE TOTAL_PREVIOUS", "CHANGE"]].drop_duplicates(subset="PARTNER")
 
         # Rename columns
-        deductions_comparison.columns = ["PARTNER", "PREVIOUS", "LATEST", "CHANGE"]
+        deductions_comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
 
         logger.info("Lift Lease comparison completed.")
         return deductions_comparison
@@ -208,11 +217,14 @@ def compare_violations(sheet_previous, sheet_latest, htotalrev_df):
         # Calculate the change in the "LIFT LEASE TOTAL"
         comparison["CHANGE"] = comparison["Violation_LATEST"] - comparison["Violation_PREVIOUS"]
 
+        for col in ["Violation_LATEST", "Violation_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].round(2)
+
         # Prepare the final dataframe for comparison
-        deductions_comparison = comparison[["PARTNER", "Violation_PREVIOUS", "Violation_LATEST", "CHANGE"]].drop_duplicates(subset="PARTNER")
+        deductions_comparison = comparison[["PARTNER", "Violation_LATEST", "Violation_PREVIOUS", "CHANGE"]].drop_duplicates(subset="PARTNER")
 
         # Rename columns
-        deductions_comparison.columns = ["PARTNER", "PREVIOUS", "LATEST", "CHANGE"]
+        deductions_comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
 
         logger.info("Violation comparison completed.")
         return deductions_comparison
@@ -222,6 +234,48 @@ def compare_violations(sheet_previous, sheet_latest, htotalrev_df):
         raise
 
 def compare_operators(sheet_previous, sheet_latest):
+    # try:
+    #     logger.info("Comparing operators between previous and latest sheets.")
+        
+    #     # Extract and store unique pairs of (OPERATOR NAME, PARTNER NAME)
+    #     operators_previous = set(sheet_previous[["OPERATOR NAME", "PARTNER NAME"]].dropna().itertuples(index=False, name=None))
+    #     operators_latest = set(sheet_latest[["OPERATOR NAME", "PARTNER NAME"]].dropna().itertuples(index=False, name=None))
+
+    #     # Identify added and removed operators
+    #     added = operators_latest - operators_previous
+    #     removed = operators_previous - operators_latest
+
+    #     # Convert to DataFrame format
+    #     added_list = [{"Operator Name": op, "Partner": partner, "Change": "Added"} for op, partner in added]
+    #     removed_list = [{"Operator Name": op, "Partner": partner, "Change": "Removed"} for op, partner in removed]
+
+    #     # Create DataFrames
+    #     added_df = pd.DataFrame(added_list)
+    #     removed_df = pd.DataFrame(removed_list)
+
+    #     # Ensure DataFrames always have the necessary columns
+    #     if added_df.empty:
+    #         added_df = pd.DataFrame(columns=["Operator Name", "Partner", "Change"])
+    #     if removed_df.empty:
+    #         removed_df = pd.DataFrame(columns=["Operator Name", "Partner", "Change"])
+
+    #     # Combine the results
+    #     operator_changes_df = pd.concat([added_df, removed_df], ignore_index=True)
+
+    #     # If no changes were found, add a "No Changes" row
+    #     if operator_changes_df.empty:
+    #         operator_changes_df = pd.DataFrame([{
+    #             "Operator Name": "No Changes",
+    #             "Partner": "No Changes",
+    #             "Change": "No Changes"
+    #         }])
+
+    #     logger.info("Operator comparison completed.")
+    #     return operator_changes_df
+
+    # except Exception as e:
+    #     logger.error(f"Error comparing operators: {e}")
+    #     raise
     try:
         logger.info("Comparing operators between previous and latest sheets.")
         
@@ -257,52 +311,173 @@ def compare_operators(sheet_previous, sheet_latest):
         logger.error(f"Error comparing operators: {e}")
         raise
 
-def compare_week1(SumVDPMV_Sheet):
+def compare_acceptance_rate(sheet_previous, sheet_latest, week):
     try:
-        logger.info("Comparing weeks between previous and latest sheets.")
+        logger.info(f"Comparing Acceptance Rate for {week}.")
 
-        # Filter for "Week1" only
-        sheet_week1 = SumVDPMV_Sheet[SumVDPMV_Sheet["WeekN"] == "Week1"]
-        
-        # Group by week1 and sum the values
-        grouped_week1 = sheet_week1.groupby("WeekN")[["Acceptance Rate", "Cancellation Rate", "Utilization%", "Payable Normal Hours", "Payable Bonus Hours"]].sum()
+        # Filter data for the specific week
+        prev_week = sheet_previous[sheet_previous["WeekN"] == week]
+        latest_week = sheet_latest[sheet_latest["WeekN"] == week]
 
-        logger.info("Week1 comparison completed.")
-        # return deductions_comparison
-        return {
-            "Acceptance Rate": grouped_week1["Acceptance Rate"].sum(),
-            "Cancellation Rate": grouped_week1["Cancellation Rate"].sum(),
-            "Utilization%": grouped_week1["Utilization%"].sum(),
-            "Payable Normal Hours": grouped_week1["Payable Normal Hours"].sum(),
-            "Payable Bonus Hours": grouped_week1["Payable Bonus Hours"].sum(),
-        }
+        # Group by "PARTNER NAME" and sum Acceptance Rate
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Acceptance Rate"].sum()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Acceptance Rate"].sum()
+
+        # Merge both datasets
+        comparison = prev_values.merge(
+            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        ).fillna(0)
+
+        # Calculate the change
+        comparison["CHANGE"] = comparison["Acceptance Rate_LATEST"] - comparison["Acceptance Rate_PREVIOUS"]
+
+        # Format columns as percentages with 4 significant digits
+        for col in ["Acceptance Rate_LATEST", "Acceptance Rate_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].apply(lambda x: float(f"{x * 100:.2f}"))
+
+        # Rename columns
+        comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
+
+        logger.info(f"{week} Acceptance Rate comparison completed.")
+        return comparison
 
     except Exception as e:
-        logger.error(f"Error comparing Week1: {e}")
+        logger.error(f"Error comparing Acceptance Rate for {week}: {e}")
         raise
 
-def compare_week2(SumVDPMV_Sheet):
+
+def compare_cancellation_rate(sheet_previous, sheet_latest, week):
     try:
-        logger.info("Comparing weeks between previous and latest sheets.")
+        logger.info(f"Comparing Cancellation Rate for {week}.")
 
-        # Filter for "Week1" only
-        sheet_week1 = SumVDPMV_Sheet[SumVDPMV_Sheet["WeekN"] == "Week2"]
-        
-        # Group by week1 and sum the values
-        grouped_week1 = sheet_week1.groupby("WeekN")[["Acceptance Rate", "Cancellation Rate", "Utilization%", "Payable Normal Hours", "Payable Bonus Hours"]].sum()
+        # Filter data for the specific week
+        prev_week = sheet_previous[sheet_previous["WeekN"] == week]
+        latest_week = sheet_latest[sheet_latest["WeekN"] == week]
 
-        logger.info("Week1 comparison completed.")
-        # return deductions_comparison
-        return {
-            "Acceptance Rate": grouped_week1["Acceptance Rate"].sum(),
-            "Cancellation Rate": grouped_week1["Cancellation Rate"].sum(),
-            "Utilization%": grouped_week1["Utilization%"].sum(),
-            "Payable Normal Hours": grouped_week1["Payable Normal Hours"].sum(),
-            "Payable Bonus Hours": grouped_week1["Payable Bonus Hours"].sum(),
-        }
+        # Group by "PARTNER NAME" and sum Cancellation Rate
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Cancellation Rate"].sum()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Cancellation Rate"].sum()
+
+        # Merge both datasets
+        comparison = prev_values.merge(
+            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        ).fillna(0)
+
+        # Calculate the change
+        comparison["CHANGE"] = comparison["Cancellation Rate_LATEST"] - comparison["Cancellation Rate_PREVIOUS"]
+
+        # Format columns as percentages with 4 significant digits
+        for col in ["Cancellation Rate_LATEST", "Cancellation Rate_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].apply(lambda x: float(f"{x * 100:.2f}"))
+
+        # Rename columns
+        comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
+
+        logger.info(f"{week} Cancellation Rate comparison completed.")
+        return comparison
 
     except Exception as e:
-        logger.error(f"Error comparing Week1: {e}")
+        logger.error(f"Error comparing Cancellation Rate for {week}: {e}")
+        raise
+
+
+def compare_utilization(sheet_previous, sheet_latest, week):
+    try:
+        logger.info(f"Comparing Utilization% for {week}.")
+
+        # Filter data for the specific week
+        prev_week = sheet_previous[sheet_previous["WeekN"] == week]
+        latest_week = sheet_latest[sheet_latest["WeekN"] == week]
+
+        # Group by "PARTNER NAME" and sum Utilization%
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Utilization%"].sum()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Utilization%"].sum()
+
+        # Merge both datasets
+        comparison = prev_values.merge(
+            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        ).fillna(0)
+
+        # Calculate the change
+        comparison["CHANGE"] = comparison["Utilization%_LATEST"] - comparison["Utilization%_PREVIOUS"]
+
+        # Format columns as percentages with 4 significant digits
+        for col in ["Utilization%_LATEST", "Utilization%_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].apply(lambda x: float(f"{x * 100:.2f}"))
+
+        # Rename columns
+        comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
+
+        logger.info(f"{week} Utilization% comparison completed.")
+        return comparison
+
+    except Exception as e:
+        logger.error(f"Error comparing Utilization% for {week}: {e}")
+        raise
+
+
+def compare_pNormalHours(sheet_previous, sheet_latest, week):
+    try:
+        logger.info(f"Comparing Payable Normal Hours for {week}.")
+
+        # Filter data for the specific week
+        prev_week = sheet_previous[sheet_previous["WeekN"] == week]
+        latest_week = sheet_latest[sheet_latest["WeekN"] == week]
+
+        # Group by "PARTNER NAME" and sum Payable Normal Hours
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Payable Normal Hours"].sum()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Payable Normal Hours"].sum()
+
+        # Merge both datasets
+        comparison = prev_values.merge(
+            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        ).fillna(0)
+
+        # Calculate the change
+        comparison["CHANGE"] = comparison["Payable Normal Hours_LATEST"] - comparison["Payable Normal Hours_PREVIOUS"]
+        for col in ["Payable Normal Hours_LATEST", "Payable Normal Hours_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].apply(lambda x: float(f"{x:.2f}"))
+
+        # Rename columns
+        comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
+
+        logger.info(f"{week} Payable Normal Hours comparison completed.")
+        return comparison
+
+    except Exception as e:
+        logger.error(f"Error comparing Payable Normal Hours for {week}: {e}")
+        raise
+
+def compare_pBonusHours(sheet_previous, sheet_latest, week):
+    try:
+        logger.info(f"Comparing Payable Bonus Hours for {week}.")
+
+        # Filter data for the specific week
+        prev_week = sheet_previous[sheet_previous["WeekN"] == week]
+        latest_week = sheet_latest[sheet_latest["WeekN"] == week]
+
+        # Group by "PARTNER NAME" and sum Payable Bonus Hours
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Payable Bonus Hours"].sum()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Payable Bonus Hours"].sum()
+
+        # Merge both datasets
+        comparison = prev_values.merge(
+            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        ).fillna(0)
+
+        # Calculate the change
+        comparison["CHANGE"] = comparison["Payable Bonus Hours_LATEST"] - comparison["Payable Bonus Hours_PREVIOUS"]
+        for col in ["Payable Bonus Hours_LATEST", "Payable Bonus Hours_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].apply(lambda x: float(f"{x:.2f}"))
+
+        # Rename columns
+        comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
+
+        logger.info(f"{week} Payable Bonus Hours comparison completed.")
+        return comparison
+
+    except Exception as e:
+        logger.error(f"Error comparing Payable Bonus Hours for {week}: {e}")
         raise
 
 def apply_formatting(sheet_name, wb):
@@ -401,80 +576,55 @@ def main(file_previous, file_latest):
         # logger.info(f"Operator Changes DF:{operator_changes_df}")
 
         # 6. Week 1 comparison
-        week1_comparison_previous = compare_week1(sheet_vdpmv_previous)
-        week1_comparison_latest = compare_week1(sheet_vdpmv_latest)
-
-        # Calculate differences and changes
-        differences = {
-            "Acceptance Rate": week1_comparison_latest["Acceptance Rate"] - week1_comparison_previous["Acceptance Rate"],
-            "Cancellation Rate": week1_comparison_latest["Cancellation Rate"] - week1_comparison_previous["Cancellation Rate"],
-            "Utilization%": week1_comparison_latest["Utilization%"] - week1_comparison_previous["Utilization%"],
-            "Payable Normal Hours": week1_comparison_latest["Payable Normal Hours"] - week1_comparison_previous["Payable Normal Hours"],
-            "Payable Bonus Hours": week1_comparison_latest["Payable Bonus Hours"] - week1_comparison_previous["Payable Bonus Hours"],
-        }
-        changes = {key: "Increased" if diff > 0 else "Decreased" if diff < 0 else "No Change"
-                    for key, diff in differences.items()}
-
-        # Create summary DataFrame
-        summary_table1 = {
-            "Metric": ["Acceptance Rate", "Cancellation Rate", "Utilization%", "Payable Normal Hours", "Payable Bonus Hours"],
-            "Previous": [week1_comparison_previous[key] for key in week1_comparison_previous],
-            "Latest": [week1_comparison_latest[key] for key in week1_comparison_latest ],
-            "Difference": [differences[key] for key in differences],
-            "Change": [changes[key] for key in changes],
-        }
-        week1_summary_df = pd.DataFrame(summary_table1)
-        logger.info(f"Summary DF: {week1_summary_df}")
-
-        # 6. Week 2 comparison
-        week2_comparison_previous = compare_week2(sheet_vdpmv_previous)
-        week2_comparison_latest = compare_week2(sheet_vdpmv_latest)
-
-        # Calculate differences and changes
-        differences = {
-            "Acceptance Rate": week2_comparison_latest["Acceptance Rate"] - week2_comparison_previous["Acceptance Rate"],
-            "Cancellation Rate": week2_comparison_latest["Cancellation Rate"] - week2_comparison_previous["Cancellation Rate"],
-            "Utilization%": week2_comparison_latest["Utilization%"] - week2_comparison_previous["Utilization%"],
-            "Payable Normal Hours": week2_comparison_latest["Payable Normal Hours"] - week2_comparison_previous["Payable Normal Hours"],
-            "Payable Bonus Hours": week2_comparison_latest["Payable Bonus Hours"] - week2_comparison_previous["Payable Bonus Hours"],
-        }
-        changes = {key: "Increased" if diff > 0 else "Decreased" if diff < 0 else "No Change"
-                    for key, diff in differences.items()}
-
-        # Create summary DataFrame
-        summary_table2 = {
-            "Metric": ["Acceptance Rate", "Cancellation Rate", "Utilization%", "Payable Normal Hours", "Payable Bonus Hours"],
-            "Previous": [week2_comparison_previous[key] for key in week2_comparison_previous],
-            "Latest": [week2_comparison_latest[key] for key in week2_comparison_latest ],
-            "Difference": [differences[key] for key in differences],
-            "Change": [changes[key] for key in changes],
-        }
-        week2_summary_df = pd.DataFrame(summary_table2)
-        logger.info(f"Summary DF: {week2_summary_df}")
+        
 
         # Save the full comparison results
         full_comparison_file = os.path.join(output_folder, "DIV2_Tables.xlsx")
+        excel_sheets = []
         with pd.ExcelWriter(full_comparison_file, engine="openpyxl") as writer:
             totals_comparison_df.to_excel(writer, sheet_name="TotalInvoicePayment", index=False)
+            excel_sheets.append("TotalInvoicePayment")
             compare_htotalrev_df.to_excel(writer, sheet_name="HTotalRevComparison", index=False)
+            excel_sheets.append("HTotalRevComparison")
             compare_liftlease_df.to_excel(writer, sheet_name="LiftLeaseComparison", index=False)
+            excel_sheets.append("LiftLeaseComparison")
             compare_violations_df.to_excel(writer, sheet_name="ViolationComparison", index=False)
+            excel_sheets.append("ViolationComparison")
             operator_changes_df.to_excel(writer, sheet_name="OperatorChanges", index=False)
-            week1_summary_df.to_excel(writer, sheet_name="Week1Comparison", index=False)
-            week2_summary_df.to_excel(writer, sheet_name="Week2Comparison", index=False)
+            excel_sheets.append("OperatorChanges")
+            for week in ["Week1", "Week2"]:
+                acceptance_changes_df = compare_acceptance_rate(sheet_vdpmv_previous, sheet_vdpmv_latest, week)
+                acceptance_changes_df.to_excel(writer, sheet_name=f"{week}AcceptRateComp", index=False)
+                excel_sheets.append(f"{week}AcceptRateComp")
+
+                cancellation_changes_df = compare_cancellation_rate(sheet_vdpmv_previous, sheet_vdpmv_latest, week)
+                cancellation_changes_df.to_excel(writer, sheet_name=f"{week}CancelRateComp", index=False)
+                excel_sheets.append(f"{week}CancelRateComp")
+
+                utilization_changes_df = compare_utilization(sheet_vdpmv_previous, sheet_vdpmv_latest, week)
+                utilization_changes_df.to_excel(writer, sheet_name=f"{week}UtilizationComp", index=False)
+                excel_sheets.append(f"{week}UtilizationComp")
+
+                pnormalhours_changes_df = compare_pNormalHours(sheet_vdpmv_previous, sheet_vdpmv_latest, week)
+                pnormalhours_changes_df.to_excel(writer, sheet_name=f"{week}PNormalHrsComp", index=False)
+                excel_sheets.append(f"{week}PNormalHrsComp")
+
+                pbonushours_changes_df = compare_pBonusHours(sheet_vdpmv_previous, sheet_vdpmv_latest, week)
+                pbonushours_changes_df.to_excel(writer, sheet_name=f"{week}PBonusHrsComp", index=False)
+                excel_sheets.append(f"{week}PBonusHrsComp")
 
         # Doperator_changes_df.to_excel(writer, sheet_name="DateComparison", index=False)
 
         # Apply formatting to the full comparison file
         wb_full = load_workbook(full_comparison_file)
-        for sheet in ["TotalInvoicePayment", "HTotalRevComparison", "LiftLeaseComparison", "ViolationComparison", "OperatorChanges", "Week1Comparison", "Week2Comparison"]:                                                                                                
+        for sheet in excel_sheets:                                                                                                
             apply_formatting(sheet, wb_full)
         wb_full.save(full_comparison_file)
         wb_full.close()
 
         logger.info(f"Main comparison process completed successfully. File saved to {full_comparison_file}.")
         # time.sleep(2)
-        # db.main(file_previous, file_latest)
+        db.main(file_previous, file_latest)
     except Exception as e:
         logger.error(f"Error in main comparison process: {e}")
         raise

@@ -8,6 +8,7 @@ import os
 import logging
 import time
 import sys
+import week_tables as wt
 
 # Set up logging
 log_folder = "Logs"
@@ -26,9 +27,7 @@ logger = logging.getLogger()
 def main(file_previous, file_latest): 
     logger.info(f"{file_previous} + {file_latest}")
     comparison_files = [
-        ('ComparedResults/Full_Comparison.xlsx', 'Dashboard'),
-        ('ComparedResults/CCCTA_Comparison.xlsx', 'CCCTA'),
-        ('ComparedResults/LAVTA_Comparison.xlsx', 'LAVTA')
+        ('ComparedResults/DIV2_Tables.xlsx', 'Dashboard')
     ]
 
     # Open the Dashboard workbook
@@ -44,33 +43,40 @@ def main(file_previous, file_latest):
 
             # Load the comparison workbook and sheet
             wb_comparison = openpyxl.load_workbook(comparison_file)
-            sheet_summary = wb_comparison['Summary']
-
+            sheet_TotalInvoicePayment = wb_comparison['TotalInvoicePayment']
+            sheet_HTotalRevComparison = wb_comparison['HTotalRevComparison']
+            sheet_LiftLeaseComparison = wb_comparison['LiftLeaseComparison']
+            sheet_ViolationComparison = wb_comparison['ViolationComparison']
+            sheet_OperatorChanges = wb_comparison['OperatorChanges']
             # paste_picture(comparison_files, dashboard_file)
 
-            # Retrieve Payment values from the 'Summary' sheet in the comparison file
-            full_prev_amount = f"{float(sheet_summary['B6'].value):,.2f}"
-            full_lat_amount = f"{float(sheet_summary['C6'].value):,.2f}"
+            # Retrieve Payment values from the 'TotalInvoicePayment' sheet in the comparison file
+            full_prev_amount = f"{float(sheet_TotalInvoicePayment['A2'].value):,.2f}"
+            full_lat_amount = f"{float(sheet_TotalInvoicePayment['B2'].value):,.2f}"
 
-            # Retrieve values from the 'Summary' sheet in the comparison file
-            full_amount_diff = round(abs(sheet_summary['D6'].value), 2)
-            full_amount_diff_status = sheet_summary['E6'].value
+            # Retrieve values from the 'TotalInvoicePayment' sheet in the comparison file
+            full_amount_diff = f"{abs(float(sheet_TotalInvoicePayment['C2'].value)):,.2f}"
+            full_amount_diff_status = sheet_TotalInvoicePayment['D2'].value
 
-            prev_full_trip_made = f"{(sheet_summary['B2'].value):,}"
-            lat_full_trip_made = f"{(sheet_summary['C2'].value):,}"
-            diff_full_trip_made = f"{float(sheet_summary['D2'].value):.0f}"
+            # Retrieve values from the 'HTotalRevComparison' sheet in the comparison file
+            prev_HTotalRev = f"{sum(cell.value for row in sheet_HTotalRevComparison.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):,.2f}"
+            lat_HTotalRev = f"{sum(cell.value for row in sheet_HTotalRevComparison.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):,.2f}"
+            diff_HTotalRev = f"{sum(cell.value for row in sheet_HTotalRevComparison.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):,.2f}"
 
-            prev_full_hrs_op = f"{(sheet_summary['B3'].value):,.0f}"
-            lat_full_hrs_op = f"{(sheet_summary['C3'].value):,.0f}"
-            diff_full_hrs_op = f"{float(sheet_summary['D3'].value):.0f}"
+            # Retrieve values from the 'LiftLeaseComparison' sheet in the comparison file
+            prev_LeaseComp = f"{sum(cell.value for row in sheet_LiftLeaseComparison.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):,.2f}"
+            lat_LeaseComp = f"{sum(cell.value for row in sheet_LiftLeaseComparison.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):,.2f}"
+            diff_LeaseComp = f"{sum(cell.value for row in sheet_LiftLeaseComparison.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):,.2f}"
 
-            prev_full_op = f"{(sheet_summary['B4'].value):,}"
-            lat_full_op = f"{(sheet_summary['C4'].value):,}"
-            diff_full_op = f"{float(sheet_summary['D4'].value):.0f}"
+            # Retrieve values from the 'ViolationComparison' sheet in the comparison file
+            prev_ViolationComp = f"{sum(cell.value for row in sheet_ViolationComparison.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):,.2f}"
+            lat_ViolationComp = f"{sum(cell.value for row in sheet_ViolationComparison.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):,.2f}"
+            diff_ViolationComp = f"{sum(cell.value for row in sheet_ViolationComparison.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):,.2f}"
 
-            prev_full_days = f"{(sheet_summary['B5'].value):,}"
-            lat_full_days = f"{(sheet_summary['C5'].value):,}"
-            diff_full_days = f"{float(sheet_summary['D5'].value):.0f}"
+            # Retrieve values from the 'OperatorChanges' sheet in the comparison file
+            prev_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:.0f}"
+            lat_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:.0f}"
+            diff_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:.0f}"
 
             # Get the corresponding sheet in the dashboard
             sheet_dashboard = wb_dashboard.sheets[sheet_name]
@@ -96,29 +102,29 @@ def main(file_previous, file_latest):
             txt_full_amount_diff_status = sheet_dashboard.shapes['TextBox 90'].api
             txt_full_amount_diff_status.TextFrame2.TextRange.Text = f"{full_amount_diff_status}"
 
-            # Access the trips made shape via the API and set the value
-            txt_full_trip_made = sheet_dashboard.shapes['txtDTripsMAde'].api
-            txt_full_trip_made.TextFrame2.TextRange.Text = f"{prev_full_trip_made} trips to {lat_full_trip_made} trips"
-            txt_full_trip_diff = sheet_dashboard.shapes['txtTripsDiff'].api
-            txt_full_trip_diff.TextFrame2.TextRange.Text = f"{diff_full_trip_made} trips"
+            # Access the HTotalRevComparison shape via the API and set the value
+            txt_HTotalRev = sheet_dashboard.shapes['txtDHTotalRevDiff'].api
+            txt_HTotalRev.TextFrame2.TextRange.Text = f"${prev_HTotalRev} to ${lat_HTotalRev}"
+            txt_HTotalRev_diff = sheet_dashboard.shapes['txtHTotalRevDiff'].api
+            txt_HTotalRev_diff.TextFrame2.TextRange.Text = f"{diff_HTotalRev} dollars"
 
-            # Access the hours operated shape via the API and set the value
-            txt_full_hrs_op = sheet_dashboard.shapes['txtDHoursOp'].api
-            txt_full_hrs_op.TextFrame2.TextRange.Text = f"{prev_full_hrs_op} hours to {lat_full_hrs_op} hours"
-            txt_full_hrs_diff = sheet_dashboard.shapes['txtHoursDiff'].api
-            txt_full_hrs_diff.TextFrame2.TextRange.Text = f"{diff_full_hrs_op} hours"
+            # Access the LiftLeaseComparison shape via the API and set the value
+            txt_LiftLease = sheet_dashboard.shapes['txtDLLeaseDiff'].api
+            txt_LiftLease.TextFrame2.TextRange.Text = f"${prev_LeaseComp} to ${lat_LeaseComp}"
+            txt_LiftLease_diff = sheet_dashboard.shapes['txtLLeaseDiff'].api
+            txt_LiftLease_diff.TextFrame2.TextRange.Text = f"{diff_LeaseComp} dollars"
 
-            # Access the operators shape via the API and set the value
-            txt_full_op = sheet_dashboard.shapes['txtDOperators'].api
-            txt_full_op.TextFrame2.TextRange.Text = f"{prev_full_op} to {lat_full_op} operators"
-            txt_full_op_diff = sheet_dashboard.shapes['txtOpsDiff'].api
-            txt_full_op_diff.TextFrame2.TextRange.Text = f"{diff_full_op} operators"
+            # Access the ViolationComparison shape via the API and set the value
+            txt_Violation = sheet_dashboard.shapes['txtDViolationsDiff'].api
+            txt_Violation.TextFrame2.TextRange.Text = f"${prev_ViolationComp} to ${lat_ViolationComp}"
+            txt_Violation_diff = sheet_dashboard.shapes['txtViolationsDiff'].api
+            txt_Violation_diff.TextFrame2.TextRange.Text = f"{diff_ViolationComp} dollars"
 
-            # Access the days operated shape via the API and set the value
-            txt_full_days = sheet_dashboard.shapes['txtDDays'].api
-            txt_full_days.TextFrame2.TextRange.Text = f"{prev_full_days} days to {lat_full_days} days"
-            txt_full_days_diff = sheet_dashboard.shapes['txtDaysDiff'].api
-            txt_full_days_diff.TextFrame2.TextRange.Text = f"{diff_full_days} days"
+            # Access the OperatorChanges shape via the API and set the value
+            txt_Operator = sheet_dashboard.shapes['txtDOperatorsDiff'].api
+            txt_Operator.TextFrame2.TextRange.Text = f"{prev_OperatorChanges} to {lat_OperatorChanges} operators"
+            txt_Operator_diff = sheet_dashboard.shapes['txtOperatorsDiff'].api
+            txt_Operator_diff.TextFrame2.TextRange.Text = f"{diff_OperatorChanges} operators"
 
             # Run the VBA macro to update the color based on the status
             try:
@@ -135,15 +141,15 @@ def main(file_previous, file_latest):
             # Run the VBA macro to update the color based on the values
             try:
                 # Parameters: TextBox names and corresponding values
-                textBoxNames = ["txtTripsDiff", "txtHoursDiff", "txtOpsDiff", "txtDaysDiff"]
-                values = [diff_full_trip_made, diff_full_hrs_op, diff_full_op, diff_full_days]
+                textBoxNames = ["txtHTotalRevDiff", "txtLLeaseDiff", "txtViolationsDiff", "txtOperatorsDiff"]
+                values = [diff_HTotalRev, diff_LeaseComp, diff_ViolationComp, diff_OperatorChanges]
 
                 # Loop through the text boxes and update colors based on the values
                 for i, textBoxName in enumerate(textBoxNames):
                     wb_dashboard.macro("UpdateSummaryColor")(sheet_name, textBoxName, values[i])
                     logger.info(f"Successfully updated color for {textBoxName} with value '{values[i]}'.")
             except Exception as e:
-                logger.error(f"An error occurred: {e}")
+                logger.error(f"A TextBox error occurred: {e}")
 
         # Save the changes to the dashboard workbook
         wb_dashboard.save()
@@ -154,9 +160,10 @@ def main(file_previous, file_latest):
         app.quit()
         time.sleep(2)
         paste_picture()
+        wt.main(file_previous, file_latest)
 
     except Exception as e:
-        logger.info(f"An error occurred: {e}")
+        logger.info(f"A Dashboard error occurred: {e}")
     # finally:
     #     wb_dashboard.save()
     #     wb_dashboard.close()
@@ -168,17 +175,15 @@ def main(file_previous, file_latest):
 
 def paste_picture():
     comparison_files = [
-        ('ComparedResults\\Full_Comparison.xlsx', 'Dashboard'),
-        ('ComparedResults\\CCCTA_Comparison.xlsx', 'CCCTA'),
-        ('ComparedResults\\LAVTA_Comparison.xlsx', 'LAVTA')
+        ('ComparedResults\\DIV2_Tables.xlsx', 'Dashboard')
     ]
     
     # Target cells for each sheet in the comparison file
     target_cells = {
-        'TripsComparison': (11, 21),
-        'HoursComparison': (44, 4),
-        'OperatorChanges': (44, 15),
-        'LeaseComparison': (44, 26)
+        'ViolationComparison': (41, 11),
+        'HTotalRevComparison': (41, 3),
+        'OperatorChanges': (22, 20),
+        'LiftLeaseComparison': (41, 19)
     }
 
     relative_dashboard_path = "ComparedResults\\Dashboard.xlsm"
@@ -215,10 +220,10 @@ def paste_picture():
             return
 
         # Delete existing pictures if they exist
-        for target_sheet_name in ['Dashboard', 'CCCTA', 'LAVTA']:
+        for target_sheet_name in ['Dashboard']:
             ws_dashboard = wb_dashboard.Sheets(target_sheet_name)
             ws_dashboard.Activate()
-            for picture_name in ['TripsTable', 'HoursTable', 'OperatorTable', 'LeaseTable']:
+            for picture_name in ['ViolationsTable', 'HoursTable', 'OperatorTable', 'LeaseTable']:
                 try:
                     ws_dashboard.Shapes(picture_name).Delete()  # Attempt to delete the picture
                     logger.info(f"Deleted existing picture: {picture_name} in {target_sheet_name}")
@@ -243,7 +248,7 @@ def paste_picture():
                 logger.info(f"Failed to open the comparison workbook at {comparison_file_path}")
                 continue
 
-            # Process each sheet in the comparison file (TripsComparison, HoursComparison, OperatorChanges)
+            # Process each sheet in the comparison file (ViolationComparison, HTotalRevComparison, OperatorChanges)
             for sheet_name, target_cell in target_cells.items():
                 sheet = wb_comparison.Sheets(sheet_name)
                 table_width = 0
@@ -268,7 +273,7 @@ def paste_picture():
                         continue
                 else:
                     logger.error(f"Skipping {sheet_name}: No data in the range.")
-                    continue
+                    continue  # Skip further processing for this sheet
 
                 # Activate the target sheet in the Dashboard workbook
                 ws_dashboard = wb_dashboard.Sheets(target_sheet_name)
@@ -290,13 +295,13 @@ def paste_picture():
                 pasted_picture.Top = target_cell_range.Top
 
                 # Name the pasted picture according to the sheet
-                if sheet_name == 'TripsComparison':
-                    pasted_picture.Name = 'TripsTable'
-                elif sheet_name == 'HoursComparison':
+                if sheet_name == 'ViolationComparison':
+                    pasted_picture.Name = 'ViolationsTable'
+                elif sheet_name == 'HTotalRevComparison':
                     pasted_picture.Name = 'HoursTable'
                 elif sheet_name == 'OperatorChanges':
                     pasted_picture.Name = 'OperatorTable'
-                elif sheet_name == 'LeaseComparison':
+                elif sheet_name == 'LiftLeaseComparison':
                     pasted_picture.Name = 'LeaseTable'
 
                 table_name = pasted_picture.Name
@@ -311,8 +316,10 @@ def paste_picture():
                     container_name = table_name.replace("Table", "Container")  # Match the container name
                     try:
                         container = ws_dashboard.Shapes(container_name)
-                        container.Width = table_width + 95  # Add 3.35 cm to width
-                        container.Height = table_height + 123  # Add 4.33 cm to height
+                        # container.Width = table_width + 95  # Add 3.35 cm to width
+                        container.Width = table_width # Add 3.35 cm to width
+                        # container.Height = table_height + 123  # Add 4.33 cm to height
+                        container.Height = table_height + 56  # Add 4.33 cm to height
                         logger.info(f"Resized {container_name} to width: {(container.Width)*0.0352778:.2f} cm, height: {(container.Height)*0.0352778:.2f} cm")
                     except Exception as e:
                         logger.error(f"Failed to resize {container_name}: {e}")
@@ -331,8 +338,8 @@ def paste_picture():
 
         logger.info("Data pasted as pictures successfully.")
 
-        # app = xw.App(visible=True)  # Open Excel with the app visible
-        # wb_dashboard = app.books.open(dashboard_file)  # Reopen the file
+        app = xw.App(visible=True)  # Open Excel with the app visible
+        wb_dashboard = app.books.open(dashboard_file)  # Reopen the file
     except Exception as e:
         logger.error(f"An error occurred: {e}")
 
@@ -351,8 +358,8 @@ def paste_picture():
         if excel:
             excel.Quit()  # Close the Excel application
             del excel 
-        app = xw.App(visible=True)  # Open Excel with the app visible
-        wb_dashboard = app.books.open(dashboard_file)  # Reopen the file
+        # app = xw.App(visible=True)  # Open Excel with the app visible
+        # wb_dashboard = app.books.open(dashboard_file)  # Reopen the file
 
 # def adjust_container(table_name, table_width, table_height):
 #     for target_sheet_name in ['Dashboard', 'CCCTA', 'LAVTA']:
