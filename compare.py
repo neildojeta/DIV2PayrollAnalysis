@@ -415,6 +415,37 @@ def compare_utilization(sheet_previous, sheet_latest, week):
         logger.error(f"Error comparing Utilization% for {week}: {e}")
         raise
 
+def compare_ReqHours(sheet_previous, sheet_latest, week):
+    try:
+        logger.info(f"Comparing Required Hours for {week}.")
+
+        # Filter data for the specific week
+        prev_week = sheet_previous[sheet_previous["WeekN"] == week]
+        latest_week = sheet_latest[sheet_latest["WeekN"] == week]
+
+        # Group by "PARTNER NAME" and sum Payable Normal Hours
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].sum()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].sum()
+
+        # Merge both datasets
+        comparison = prev_values.merge(
+            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        ).fillna(0)
+
+        # Calculate the change
+        comparison["CHANGE"] = comparison["% of Hours to Required_LATEST"] - comparison["% of Hours to Required_PREVIOUS"]
+        for col in ["% of Hours to Required_LATEST", "% of Hours to Required_PREVIOUS", "CHANGE"]:
+            comparison[col] = comparison[col].apply(lambda x: float(f"{x:.2f}"))
+
+        # Rename columns
+        comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
+
+        logger.info(f"{week} Required Hours comparison completed.")
+        return comparison
+
+    except Exception as e:
+        logger.error(f"Error comparing Required Hours for {week}: {e}")
+        raise
 
 def compare_pNormalHours(sheet_previous, sheet_latest, week):
     try:
@@ -572,7 +603,7 @@ def main(file_previous, file_latest):
         # logger.info(f"Violations DF: {compare_violations_df}")
 
         # 5. Compare operators
-        operator_changes_df = compare_operators(sheet_partner_previous, sheet_partner_latest)
+        # operator_changes_df = compare_operators(sheet_partner_previous, sheet_partner_latest)
         # logger.info(f"Operator Changes DF:{operator_changes_df}")
 
         # 6. Week 1 comparison
@@ -590,8 +621,8 @@ def main(file_previous, file_latest):
             excel_sheets.append("LiftLeaseComparison")
             compare_violations_df.to_excel(writer, sheet_name="ViolationComparison", index=False)
             excel_sheets.append("ViolationComparison")
-            operator_changes_df.to_excel(writer, sheet_name="OperatorChanges", index=False)
-            excel_sheets.append("OperatorChanges")
+            # operator_changes_df.to_excel(writer, sheet_name="OperatorChanges", index=False)
+            # excel_sheets.append("OperatorChanges")
             for week in ["Week1", "Week2"]:
                 acceptance_changes_df = compare_acceptance_rate(sheet_vdpmv_previous, sheet_vdpmv_latest, week)
                 acceptance_changes_df.to_excel(writer, sheet_name=f"{week}AcceptRateComp", index=False)
@@ -612,6 +643,10 @@ def main(file_previous, file_latest):
                 pbonushours_changes_df = compare_pBonusHours(sheet_vdpmv_previous, sheet_vdpmv_latest, week)
                 pbonushours_changes_df.to_excel(writer, sheet_name=f"{week}PBonusHrsComp", index=False)
                 excel_sheets.append(f"{week}PBonusHrsComp")
+
+                reqhours_changes_df = compare_ReqHours(sheet_vdpmv_previous, sheet_vdpmv_latest, week)
+                reqhours_changes_df.to_excel(writer, sheet_name=f"{week}ReqHrsComp", index=False)
+                excel_sheets.append(f"{week}ReqHrsComp")
 
         # Doperator_changes_df.to_excel(writer, sheet_name="DateComparison", index=False)
 

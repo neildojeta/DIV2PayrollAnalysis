@@ -49,6 +49,7 @@ def main(file_previous, file_latest):
             sheet_Week1UtilizationComp = wb_comparison[f'{sheet_name}UtilizationComp']
             sheet_Week1PNormalHrsComp = wb_comparison[f'{sheet_name}PNormalHrsComp']
             sheet_Week1PBonusHrsComp = wb_comparison[f'{sheet_name}PBonusHrsComp']
+            sheet_Week1ReqHrsComp = wb_comparison[f'{sheet_name}ReqHrsComp']
             logger.info(f"Processing {comparison_file} -> {sheet_name}")
 
             # Retrieve values from the 'Week1AcceptRateComp' sheet in the comparison file
@@ -68,13 +69,18 @@ def main(file_previous, file_latest):
 
             # Retrieve values from the 'Week1PNormalHrsComp' sheet in the comparison file
             prev_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:,.2f}"
-            lat_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:.2f}"
+            lat_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:,.2f}"
             diff_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:,.2f}"
 
             # Retrieve values from the 'Week1PBonusHrsComp' sheet in the comparison file
             prev_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:,.2f}"
-            lat_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:.2f}"
+            lat_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:,.2f}"
             diff_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:,.2f}"
+
+            # Retrieve values from the 'Week1ReqHrsComp' sheet in the comparison file
+            prev_Week1ReqHrsComp = f"{sum(cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:.2f}"
+            lat_Week1ReqHrsComp = f"{sum(cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:.2f}"
+            diff_Week1ReqHrsComp = f"{sum(cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:.2f}"
 
             # Get the corresponding sheet in the dashboard
             sheet_dashboard = wb_dashboard.sheets[sheet_name]
@@ -207,7 +213,7 @@ def wpaste_picture():
                 f'{target_sheet_name}UtilizationComp': (43, 3),
                 f'{target_sheet_name}PNormalHrsComp': (43, 11),
                 f'{target_sheet_name}PBonusHrsComp': (43, 19),
-                
+                f'{target_sheet_name}ReqHrsComp': (43, 19),
             }
             # Build the full path for the comparison file
             comparison_file_path = os.path.join(script_dir, comparison_file)
@@ -281,6 +287,8 @@ def wpaste_picture():
                     pasted_picture.Name = 'CancelTable'
                 elif sheet_name == f'{target_sheet_name}PBonusHrsComp':
                     pasted_picture.Name = 'BonusTable'
+                elif sheet_name == f'{target_sheet_name}ReqHrsComp':
+                    pasted_picture.Name = 'ReqTable'
 
                 table_name = pasted_picture.Name
                 logger.info(f"Table Name: {table_name}")

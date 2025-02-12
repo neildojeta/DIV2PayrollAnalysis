@@ -47,7 +47,7 @@ def main(file_previous, file_latest):
             sheet_HTotalRevComparison = wb_comparison['HTotalRevComparison']
             sheet_LiftLeaseComparison = wb_comparison['LiftLeaseComparison']
             sheet_ViolationComparison = wb_comparison['ViolationComparison']
-            sheet_OperatorChanges = wb_comparison['OperatorChanges']
+            # sheet_OperatorChanges = wb_comparison['OperatorChanges']
             # paste_picture(comparison_files, dashboard_file)
 
             # Retrieve Payment values from the 'TotalInvoicePayment' sheet in the comparison file
@@ -74,9 +74,9 @@ def main(file_previous, file_latest):
             diff_ViolationComp = f"{sum(cell.value for row in sheet_ViolationComparison.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):,.2f}"
 
             # Retrieve values from the 'OperatorChanges' sheet in the comparison file
-            prev_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:.0f}"
-            lat_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:.0f}"
-            diff_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:.0f}"
+            # prev_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:.0f}"
+            # lat_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:.0f}"
+            # diff_OperatorChanges = f"{sum(cell.value for row in sheet_OperatorChanges.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:.0f}"
 
             # Get the corresponding sheet in the dashboard
             sheet_dashboard = wb_dashboard.sheets[sheet_name]
@@ -106,25 +106,25 @@ def main(file_previous, file_latest):
             txt_HTotalRev = sheet_dashboard.shapes['txtDHTotalRevDiff'].api
             txt_HTotalRev.TextFrame2.TextRange.Text = f"${prev_HTotalRev} to ${lat_HTotalRev}"
             txt_HTotalRev_diff = sheet_dashboard.shapes['txtHTotalRevDiff'].api
-            txt_HTotalRev_diff.TextFrame2.TextRange.Text = f"{diff_HTotalRev} dollars"
+            txt_HTotalRev_diff.TextFrame2.TextRange.Text = f"${diff_HTotalRev}"
 
             # Access the LiftLeaseComparison shape via the API and set the value
             txt_LiftLease = sheet_dashboard.shapes['txtDLLeaseDiff'].api
             txt_LiftLease.TextFrame2.TextRange.Text = f"${prev_LeaseComp} to ${lat_LeaseComp}"
             txt_LiftLease_diff = sheet_dashboard.shapes['txtLLeaseDiff'].api
-            txt_LiftLease_diff.TextFrame2.TextRange.Text = f"{diff_LeaseComp} dollars"
+            txt_LiftLease_diff.TextFrame2.TextRange.Text = f"${diff_LeaseComp}"
 
             # Access the ViolationComparison shape via the API and set the value
             txt_Violation = sheet_dashboard.shapes['txtDViolationsDiff'].api
             txt_Violation.TextFrame2.TextRange.Text = f"${prev_ViolationComp} to ${lat_ViolationComp}"
             txt_Violation_diff = sheet_dashboard.shapes['txtViolationsDiff'].api
-            txt_Violation_diff.TextFrame2.TextRange.Text = f"{diff_ViolationComp} dollars"
+            txt_Violation_diff.TextFrame2.TextRange.Text = f"${diff_ViolationComp}"
 
             # Access the OperatorChanges shape via the API and set the value
-            txt_Operator = sheet_dashboard.shapes['txtDOperatorsDiff'].api
-            txt_Operator.TextFrame2.TextRange.Text = f"{prev_OperatorChanges} to {lat_OperatorChanges} operators"
-            txt_Operator_diff = sheet_dashboard.shapes['txtOperatorsDiff'].api
-            txt_Operator_diff.TextFrame2.TextRange.Text = f"{diff_OperatorChanges} operators"
+            # txt_Operator = sheet_dashboard.shapes['txtDOperatorsDiff'].api
+            # txt_Operator.TextFrame2.TextRange.Text = f"{prev_OperatorChanges} to {lat_OperatorChanges} operators"
+            # txt_Operator_diff = sheet_dashboard.shapes['txtOperatorsDiff'].api
+            # txt_Operator_diff.TextFrame2.TextRange.Text = f"{diff_OperatorChanges} operators"
 
             # Run the VBA macro to update the color based on the status
             try:
@@ -141,8 +141,11 @@ def main(file_previous, file_latest):
             # Run the VBA macro to update the color based on the values
             try:
                 # Parameters: TextBox names and corresponding values
-                textBoxNames = ["txtHTotalRevDiff", "txtLLeaseDiff", "txtViolationsDiff", "txtOperatorsDiff"]
-                values = [diff_HTotalRev, diff_LeaseComp, diff_ViolationComp, diff_OperatorChanges]
+                # textBoxNames = ["txtHTotalRevDiff", "txtLLeaseDiff", "txtViolationsDiff", "txtOperatorsDiff"]
+                # values = [diff_HTotalRev, diff_LeaseComp, diff_ViolationComp, diff_OperatorChanges]
+
+                textBoxNames = ["txtHTotalRevDiff", "txtLLeaseDiff", "txtViolationsDiff"]
+                values = [diff_HTotalRev, diff_LeaseComp, diff_ViolationComp]
 
                 # Loop through the text boxes and update colors based on the values
                 for i, textBoxName in enumerate(textBoxNames):
@@ -160,7 +163,7 @@ def main(file_previous, file_latest):
         app.quit()
         time.sleep(2)
         paste_picture()
-        wt.main(file_previous, file_latest)
+        # wt.main(file_previous, file_latest)
 
     except Exception as e:
         logger.info(f"A Dashboard error occurred: {e}")
@@ -180,10 +183,10 @@ def paste_picture():
     
     # Target cells for each sheet in the comparison file
     target_cells = {
-        'ViolationComparison': (41, 11),
-        'HTotalRevComparison': (41, 3),
-        'OperatorChanges': (22, 20),
-        'LiftLeaseComparison': (41, 19)
+        'ViolationComparison': (31, 13),
+        'HTotalRevComparison': (15, 13),
+        # 'OperatorChanges': (22, 20),
+        'LiftLeaseComparison': (6, 20)
     }
 
     relative_dashboard_path = "ComparedResults\\Dashboard.xlsm"
@@ -223,7 +226,8 @@ def paste_picture():
         for target_sheet_name in ['Dashboard']:
             ws_dashboard = wb_dashboard.Sheets(target_sheet_name)
             ws_dashboard.Activate()
-            for picture_name in ['ViolationsTable', 'HoursTable', 'OperatorTable', 'LeaseTable']:
+            # for picture_name in ['ViolationsTable', 'HoursTable', 'OperatorTable', 'LeaseTable']:
+            for picture_name in ['ViolationsTable', 'HoursTable', 'LeaseTable']:
                 try:
                     ws_dashboard.Shapes(picture_name).Delete()  # Attempt to delete the picture
                     logger.info(f"Deleted existing picture: {picture_name} in {target_sheet_name}")
@@ -299,8 +303,8 @@ def paste_picture():
                     pasted_picture.Name = 'ViolationsTable'
                 elif sheet_name == 'HTotalRevComparison':
                     pasted_picture.Name = 'HoursTable'
-                elif sheet_name == 'OperatorChanges':
-                    pasted_picture.Name = 'OperatorTable'
+                # elif sheet_name == 'OperatorChanges':
+                #     pasted_picture.Name = 'OperatorTable'
                 elif sheet_name == 'LiftLeaseComparison':
                     pasted_picture.Name = 'LeaseTable'
 
