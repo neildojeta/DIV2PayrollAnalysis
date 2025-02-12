@@ -319,9 +319,9 @@ def compare_acceptance_rate(sheet_previous, sheet_latest, week):
         prev_week = sheet_previous[sheet_previous["WeekN"] == week]
         latest_week = sheet_latest[sheet_latest["WeekN"] == week]
 
-        # Group by "PARTNER NAME" and sum Acceptance Rate
-        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Acceptance Rate"].sum()
-        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Acceptance Rate"].sum()
+        # Group by "PARTNER NAME" and mean Acceptance Rate
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Acceptance Rate"].mean()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Acceptance Rate"].mean()
 
         # Merge both datasets
         comparison = prev_values.merge(
@@ -355,8 +355,8 @@ def compare_cancellation_rate(sheet_previous, sheet_latest, week):
         latest_week = sheet_latest[sheet_latest["WeekN"] == week]
 
         # Group by "PARTNER NAME" and sum Cancellation Rate
-        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Cancellation Rate"].sum()
-        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Cancellation Rate"].sum()
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Cancellation Rate"].mean()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Cancellation Rate"].mean()
 
         # Merge both datasets
         comparison = prev_values.merge(
@@ -390,8 +390,8 @@ def compare_utilization(sheet_previous, sheet_latest, week):
         latest_week = sheet_latest[sheet_latest["WeekN"] == week]
 
         # Group by "PARTNER NAME" and sum Utilization%
-        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Utilization%"].sum()
-        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Utilization%"].sum()
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["Utilization%"].mean()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Utilization%"].mean()
 
         # Merge both datasets
         comparison = prev_values.merge(
@@ -424,8 +424,8 @@ def compare_ReqHours(sheet_previous, sheet_latest, week):
         latest_week = sheet_latest[sheet_latest["WeekN"] == week]
 
         # Group by "PARTNER NAME" and sum Payable Normal Hours
-        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].sum()
-        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].sum()
+        prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].mean()
+        latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].mean()
 
         # Merge both datasets
         comparison = prev_values.merge(

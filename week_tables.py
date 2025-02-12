@@ -22,6 +22,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger()
 
+def average(column_values):
+    values = [cell.value for row in column_values for cell in row if cell.value is not None]
+    return round(sum(values) / len(values), 2) if values else 0.00  # Returns a float
+
 # Define the comparison files and corresponding sheets
 def main(file_previous, file_latest): 
     logger.info(f"Week {file_previous} + {file_latest}")
@@ -40,7 +44,7 @@ def main(file_previous, file_latest):
 
         # Loop through each comparison file and corresponding sheet
         for comparison_file, sheet_name in comparison_files:
-            # logger.info(f"Processing {comparison_file} -> {sheet_name}")
+            logger.info(f"Processing {comparison_file} -> {sheet_name}")
 
             # Load the comparison workbook and sheet for week 1
             wb_comparison = openpyxl.load_workbook(comparison_file)
@@ -52,20 +56,36 @@ def main(file_previous, file_latest):
             sheet_Week1ReqHrsComp = wb_comparison[f'{sheet_name}ReqHrsComp']
             logger.info(f"Processing {comparison_file} -> {sheet_name}")
 
+            # # Retrieve values from the 'Week1AcceptRateComp' sheet in the comparison file
+            # prev_Accept = f"{sum(cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):.2f}"
+            # lat_Accept = f"{sum(cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):.2f}"
+            # diff_Accept = f"{sum(cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):.2f}"
+
+            # # Retrieve values from the 'Week1CancelRateComp' sheet in the comparison file
+            # prev_Cancel = f"{sum(cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):.2f}"
+            # lat_Cancel= f"{sum(cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):.2f}"
+            # diff_Cancel = f"{sum(cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):.2f}"
+
+            # # Retrieve values from the 'Week1UtilizationComp' sheet in the comparison file
+            # prev_UtilizationComp = f"{sum(cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):.2f}"
+            # lat_UtilizationComp = f"{sum(cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):.2f}"
+            # diff_UtilizationComp = f"{sum(cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):.2f}"
+
             # Retrieve values from the 'Week1AcceptRateComp' sheet in the comparison file
-            prev_Accept = f"{sum(cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):.2f}"
-            lat_Accept = f"{sum(cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):.2f}"
-            diff_Accept = f"{sum(cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):.2f}"
+            prev_Accept = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
+            lat_Accept = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
+            diff_Accept = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None]) else "0.00"
 
             # Retrieve values from the 'Week1CancelRateComp' sheet in the comparison file
-            prev_Cancel = f"{sum(cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):.2f}"
-            lat_Cancel= f"{sum(cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):.2f}"
-            diff_Cancel = f"{sum(cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):.2f}"
+            prev_Cancel = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
+            lat_Cancel = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
+            diff_Cancel = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None]) else "0.00"
 
             # Retrieve values from the 'Week1UtilizationComp' sheet in the comparison file
-            prev_UtilizationComp = f"{sum(cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None):.2f}"
-            lat_UtilizationComp = f"{sum(cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None):.2f}"
-            diff_UtilizationComp = f"{sum(cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):.2f}"
+            prev_UtilizationComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
+            lat_UtilizationComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
+            diff_UtilizationComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None]) else "0.00"
+
 
             # Retrieve values from the 'Week1PNormalHrsComp' sheet in the comparison file
             prev_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:,.2f}"
@@ -78,16 +98,23 @@ def main(file_previous, file_latest):
             diff_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:,.2f}"
 
             # Retrieve values from the 'Week1ReqHrsComp' sheet in the comparison file
-            prev_Week1ReqHrsComp = f"{sum(cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:.2f}"
-            lat_Week1ReqHrsComp = f"{sum(cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:.2f}"
-            diff_Week1ReqHrsComp = f"{sum(cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:.2f}"
+            prev_Week1ReqHrsComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
+            lat_Week1ReqHrsComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
+            diff_Week1ReqHrsComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None]) else "0.00"
+
+            logger.info(f"Accept Hrs: {prev_Accept} -> {lat_Accept}")
 
             # Get the corresponding sheet in the dashboard
             sheet_dashboard = wb_dashboard.sheets[sheet_name]
+            sheet_dashboard.activate()
+
+            # Ensure the dashboard sheet is active
+            # wb_dashboard.app.api.ActiveSheet = sheet_dashboard.api 
+            # wb_dashboard.app.api.Application.ScreenUpdating = True 
 
             # Access the Week1AcceptRateComp shape via the API and set the value
             txt_Accept = sheet_dashboard.shapes['txtDAcceptRateDiff'].api
-            txt_Accept .TextFrame2.TextRange.Text = f"{prev_Accept}% to {lat_Accept}%"
+            txt_Accept.TextFrame2.TextRange.Text = f"{prev_Accept}% to {lat_Accept}%"
             txt_Accept_diff = sheet_dashboard.shapes['txtAcceptDiff'].api
             txt_Accept_diff.TextFrame2.TextRange.Text = f"{diff_Accept}%"
 
@@ -115,12 +142,18 @@ def main(file_previous, file_latest):
             txt_PBonus_diff = sheet_dashboard.shapes['txtPBonusHrsDiff'].api
             txt_PBonus_diff.TextFrame2.TextRange.Text = f"${diff_Week1PBonusHrsComp}"
 
+            # Access the Week1ReqHrsComp shape via the API and set the value
+            txt_ReqHrs = sheet_dashboard.shapes['txtDReqHrsDiff'].api
+            txt_ReqHrs.TextFrame2.TextRange.Text = f"{prev_Week1ReqHrsComp}% to {lat_Week1ReqHrsComp}%"
+            txt_ReqHrs_diff = sheet_dashboard.shapes['txtReqHrsDiff'].api
+            txt_ReqHrs_diff.TextFrame2.TextRange.Text = f"{diff_Week1ReqHrsComp}%"
+
 
             # Run the VBA macro to update the color based on the values
             try:
                 # Parameters: TextBox names and corresponding values
-                textBoxNames = ["txtAcceptDiff", "txtCancelDiff", "txtUtilizationDiff", "txtPNormalHrsDiff", "txtPBonusHrsDiff"]
-                values = [diff_Accept, diff_Cancel, diff_UtilizationComp, diff_Week1PNormalHrsComp, diff_Week1PBonusHrsComp]
+                textBoxNames = ["txtAcceptDiff", "txtCancelDiff", "txtUtilizationDiff", "txtPNormalHrsDiff", "txtPBonusHrsDiff", "txtReqHrsDiff"]
+                values = [diff_Accept, diff_Cancel, diff_UtilizationComp, diff_Week1PNormalHrsComp, diff_Week1PBonusHrsComp, diff_Week1ReqHrsComp]
 
                 # Loop through the text boxes and update colors based on the values
                 for i, textBoxName in enumerate(textBoxNames):
@@ -128,13 +161,17 @@ def main(file_previous, file_latest):
                     logger.info(f"Successfully updated color for {textBoxName} with value '{values[i]}'.")
             except Exception as e:
                 logger.error(f"A Week TextBox error occurred: {e}")
-
+        # wb_comparison.save()
+        # wb_comparison.close()
+        # app.api.ScreenUpdating = True  # Enable screen updating
         # Save the changes to the dashboard workbook
+        # wb_dashboard.refresh_all() # Refresh all data connections
+        time.sleep(2)
         wb_dashboard.save()
         wb_dashboard.close()
         logger.info(f"{dashboard_file} has been successfully updated and saved.")
 
-        # paste_picture(comparison_files, dashboard_file)
+        # # paste_picture(comparison_files, dashboard_file)
         app.quit()
         time.sleep(2)
         wpaste_picture()
@@ -150,14 +187,13 @@ def main(file_previous, file_latest):
         # app = xw.App(visible=True)  # Open Excel with the app visible
         # wb_dashboard = app.books.open(dashboard_file)  # Reopen the file
 
+
 def wpaste_picture():
     comparison_files = [
         ('ComparedResults\\DIV2_Tables.xlsx', 'Week1'),
         ('ComparedResults\\DIV2_Tables.xlsx', 'Week2')
     ]
     
-    
-
     relative_dashboard_path = "ComparedResults\\Dashboard.xlsm"
     # Get the absolute path of the current script's directory
     # script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -195,7 +231,7 @@ def wpaste_picture():
         for target_sheet_name in ['Week1','Week2']:
             ws_dashboard = wb_dashboard.Sheets(target_sheet_name)
             ws_dashboard.Activate()
-            for picture_name in ['AcceptTable', 'CancelTable', 'UtilizationTable', 'NormalTable', 'BonusTable']:
+            for picture_name in ['AcceptTable', 'CancelTable', 'UtilizationTable', 'NormalTable', 'BonusTable', 'ReqTable']:
                 try:
                     ws_dashboard.Shapes(picture_name).Delete()  # Attempt to delete the picture
                     logger.info(f"Deleted existing picture: {picture_name} in {target_sheet_name}")
@@ -208,12 +244,12 @@ def wpaste_picture():
         for comparison_file, target_sheet_name in comparison_files:
             # Target cells for each sheet in the comparison file
             target_cells = {
-                f'{target_sheet_name}AcceptRateComp': (25, 12),
-                f'{target_sheet_name}CancelRateComp': (25, 20),
-                f'{target_sheet_name}UtilizationComp': (43, 3),
-                f'{target_sheet_name}PNormalHrsComp': (43, 11),
-                f'{target_sheet_name}PBonusHrsComp': (43, 19),
-                f'{target_sheet_name}ReqHrsComp': (43, 19),
+                f'{target_sheet_name}AcceptRateComp': (9, 13),
+                f'{target_sheet_name}CancelRateComp': (9, 21),
+                f'{target_sheet_name}UtilizationComp': (9, 29),
+                f'{target_sheet_name}PNormalHrsComp': (28, 13),
+                f'{target_sheet_name}PBonusHrsComp': (28, 21),
+                f'{target_sheet_name}ReqHrsComp': (28, 29)
             }
             # Build the full path for the comparison file
             comparison_file_path = os.path.join(script_dir, comparison_file)
@@ -312,6 +348,7 @@ def wpaste_picture():
 
                 # wb_comparison.Save()
                 # wb_dashboard.Save()
+
         wb_comparison.Save()
         wb_comparison.Close() 
             # Close the comparison workbook without saving
@@ -355,6 +392,6 @@ def wpaste_picture():
 #         ('Compared Results/LAVTA_Comparison.xlsx', 'LAVTA')
 #     ]
 #     dashboard_file = 'Compared Results/Dashboard.xlsm'
-#     main(file_previous, file_latest)
-#     paste_picture(comparison_files, dashboard_file)
-#     paste_picture(comparison_files, dashboard_file)
+    # main(file_previous, file_latest)
+    # paste_picture(comparison_files, dashboard_file)
+    # paste_picture(comparison_files, dashboard_file)

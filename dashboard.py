@@ -163,7 +163,8 @@ def main(file_previous, file_latest):
         app.quit()
         time.sleep(2)
         paste_picture()
-        # wt.main(file_previous, file_latest)
+        time.sleep(2)
+        wt.main(file_previous, file_latest)
 
     except Exception as e:
         logger.info(f"A Dashboard error occurred: {e}")
