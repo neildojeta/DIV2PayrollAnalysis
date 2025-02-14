@@ -244,12 +244,12 @@ def wpaste_picture():
         for comparison_file, target_sheet_name in comparison_files:
             # Target cells for each sheet in the comparison file
             target_cells = {
-                f'{target_sheet_name}AcceptRateComp': (9, 13),
-                f'{target_sheet_name}CancelRateComp': (9, 21),
-                f'{target_sheet_name}UtilizationComp': (9, 29),
-                f'{target_sheet_name}PNormalHrsComp': (28, 13),
-                f'{target_sheet_name}PBonusHrsComp': (28, 21),
-                f'{target_sheet_name}ReqHrsComp': (28, 29)
+                f'{target_sheet_name}AcceptRateComp': (5, 12),
+                f'{target_sheet_name}CancelRateComp': (5, 20),
+                f'{target_sheet_name}UtilizationComp': (5, 28),
+                f'{target_sheet_name}PNormalHrsComp': (24, 12),
+                f'{target_sheet_name}PBonusHrsComp': (24, 20),
+                f'{target_sheet_name}ReqHrsComp': (24, 28)
             }
             # Build the full path for the comparison file
             comparison_file_path = os.path.join(script_dir, comparison_file)

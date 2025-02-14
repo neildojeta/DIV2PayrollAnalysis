@@ -184,10 +184,10 @@ def paste_picture():
     
     # Target cells for each sheet in the comparison file
     target_cells = {
-        'ViolationComparison': (31, 13),
-        'HTotalRevComparison': (15, 13),
-        # 'OperatorChanges': (22, 20),
-        'LiftLeaseComparison': (6, 20)
+        'ViolationComparison': (30, 12),
+        'HTotalRevComparison': (14, 12),
+        # 'OperatorChanges': (22, 19),
+        'LiftLeaseComparison': (5, 19)
     }
 
     relative_dashboard_path = "ComparedResults\\Dashboard.xlsm"
