@@ -144,27 +144,26 @@ def compare_totals(sheet_previous, sheet_latest):
 def compare_htotalrev(sheet_previous, sheet_latest):
     try:
         logger.info("Comparing Hourly Total Revs between previous and latest sheets.")
-        
-        # Select the relevant columns directly
-        previous_values = sheet_previous[["PARTNER NAME", "Total Rev"]]
-        latest_values = sheet_latest[["PARTNER NAME", "Total Rev"]]
 
-        # Merge both dataframes on "PARTNER" and handle missing values with 0
-        comparison = previous_values.merge(latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")).fillna(0)
+        # Group by "PARTNER NAME" and sum "Total Rev"
+        previous_grouped = sheet_previous.groupby("PARTNER NAME", as_index=False)["Total Rev"].sum()
+        latest_grouped = sheet_latest.groupby("PARTNER NAME", as_index=False)["Total Rev"].sum()
 
-        # Calculate the change in the "Total Rev"
+        # Merge both grouped dataframes on "PARTNER NAME"
+        comparison = previous_grouped.merge(latest_grouped, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")).fillna(0)
+
+        # Calculate the change in "Total Rev"
         comparison["CHANGE"] = comparison["Total Rev_LATEST"] - comparison["Total Rev_PREVIOUS"]
+
+        # Round values
         for col in ["Total Rev_LATEST", "Total Rev_PREVIOUS", "CHANGE"]:
             comparison[col] = comparison[col].round(2)
 
-        # Prepare the final dataframe for comparison
-        deductions_comparison = comparison[["PARTNER NAME", "Total Rev_LATEST", "Total Rev_PREVIOUS", "CHANGE"]].drop_duplicates(subset="PARTNER NAME")
-
-        # Rename columns
-        deductions_comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
+        # Rename columns for clarity
+        comparison.columns = ["PARTNER", "PREVIOUS", "LATEST", "CHANGE"]
 
         logger.info("HTOTALREV comparison completed.")
-        return deductions_comparison
+        return comparison
 
     except Exception as e:
         logger.error(f"Error comparing HTOTALREV: {e}")

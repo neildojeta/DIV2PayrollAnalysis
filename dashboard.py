@@ -51,8 +51,8 @@ def main(file_previous, file_latest):
             # paste_picture(comparison_files, dashboard_file)
 
             # Retrieve Payment values from the 'TotalInvoicePayment' sheet in the comparison file
-            full_prev_amount = f"{float(sheet_TotalInvoicePayment['A2'].value):,.2f}"
-            full_lat_amount = f"{float(sheet_TotalInvoicePayment['B2'].value):,.2f}"
+            full_prev_amount = f"{float(sheet_TotalInvoicePayment['B2'].value):,.2f}"
+            full_lat_amount = f"{float(sheet_TotalInvoicePayment['A2'].value):,.2f}"
 
             # Retrieve values from the 'TotalInvoicePayment' sheet in the comparison file
             full_amount_diff = f"{abs(float(sheet_TotalInvoicePayment['C2'].value)):,.2f}"
@@ -343,8 +343,8 @@ def paste_picture():
 
         logger.info("Data pasted as pictures successfully.")
 
-        app = xw.App(visible=True)  # Open Excel with the app visible
-        wb_dashboard = app.books.open(dashboard_file)  # Reopen the file
+        # app = xw.App(visible=True)  # Open Excel with the app visible
+        # wb_dashboard = app.books.open(dashboard_file)  # Reopen the file
     except Exception as e:
         logger.error(f"An error occurred: {e}")
 
