@@ -150,7 +150,7 @@ def compare_htotalrev(sheet_previous, sheet_latest):
         latest_grouped = sheet_latest.groupby("PARTNER NAME", as_index=False)["Total Rev"].sum()
 
         # Merge both grouped dataframes on "PARTNER NAME"
-        comparison = previous_grouped.merge(latest_grouped, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")).fillna(0)
+        comparison = latest_grouped.merge(previous_grouped, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")).fillna(0)
 
         # Calculate the change in "Total Rev"
         comparison["CHANGE"] = comparison["Total Rev_LATEST"] - comparison["Total Rev_PREVIOUS"]
@@ -160,7 +160,7 @@ def compare_htotalrev(sheet_previous, sheet_latest):
             comparison[col] = comparison[col].round(2)
 
         # Rename columns for clarity
-        comparison.columns = ["PARTNER", "PREVIOUS", "LATEST", "CHANGE"]
+        comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
 
         logger.info("HTOTALREV comparison completed.")
         return comparison
@@ -179,7 +179,7 @@ def compare_liftlease(sheet_previous, sheet_latest, htotalrev_df):
 
 
         # Merge both dataframes on "PARTNER" and handle missing values with 0
-        comparison = previous_values.merge(latest_values, on="PARTNER", how="outer", suffixes=("_PREVIOUS", "_LATEST")).fillna(0)
+        comparison = latest_values.merge(previous_values, on="PARTNER", how="outer", suffixes=("_PREVIOUS", "_LATEST")).fillna(0)
         comparison = comparison.merge(htotalrev_df, on="PARTNER", how="inner").fillna(0)
 
         # Calculate the change in the "LIFT LEASE TOTAL"
@@ -210,7 +210,7 @@ def compare_violations(sheet_previous, sheet_latest, htotalrev_df):
 
 
         # Merge both dataframes on "PARTNER" and handle missing values with 0
-        comparison = previous_values.merge(latest_values, on="PARTNER", how="outer", suffixes=("_PREVIOUS", "_LATEST")).fillna(0)
+        comparison = latest_values.merge(previous_values, on="PARTNER", how="outer", suffixes=("_PREVIOUS", "_LATEST")).fillna(0)
         comparison = comparison.merge(htotalrev_df, on="PARTNER", how="inner").fillna(0)
 
         # Calculate the change in the "LIFT LEASE TOTAL"
@@ -323,8 +323,8 @@ def compare_acceptance_rate(sheet_previous, sheet_latest, week):
         latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Acceptance Rate"].mean()
 
         # Merge both datasets
-        comparison = prev_values.merge(
-            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        comparison = latest_values.merge(
+            prev_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
         ).fillna(0)
 
         # Calculate the change
@@ -358,8 +358,8 @@ def compare_cancellation_rate(sheet_previous, sheet_latest, week):
         latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Cancellation Rate"].mean()
 
         # Merge both datasets
-        comparison = prev_values.merge(
-            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        comparison = latest_values.merge(
+            prev_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
         ).fillna(0)
 
         # Calculate the change
@@ -393,8 +393,8 @@ def compare_utilization(sheet_previous, sheet_latest, week):
         latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Utilization%"].mean()
 
         # Merge both datasets
-        comparison = prev_values.merge(
-            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        comparison = latest_values.merge(
+            prev_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
         ).fillna(0)
 
         # Calculate the change
@@ -414,6 +414,40 @@ def compare_utilization(sheet_previous, sheet_latest, week):
         logger.error(f"Error comparing Utilization% for {week}: {e}")
         raise
 
+# def compare_ReqHours(sheet_previous, sheet_latest, week):
+#     try:
+#         logger.info(f"Comparing Required Hours for {week}.")
+
+#         # Filter data for the specific week
+#         prev_week = sheet_previous[sheet_previous["WeekN"] == week]
+#         latest_week = sheet_latest[sheet_latest["WeekN"] == week]
+
+#         # Group by "PARTNER NAME" and sum Payable Normal Hours
+#         # prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].mean()
+#         # latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].mean()
+#         prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"]
+#         latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"]
+
+#         # Merge both datasets
+#         comparison = prev_values.merge(
+#             latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+#         ).fillna(0)
+
+#         # Calculate the change
+#         comparison["CHANGE"] = comparison["% of Hours to Required_LATEST"] - comparison["% of Hours to Required_PREVIOUS"]
+#         for col in ["% of Hours to Required_LATEST", "% of Hours to Required_PREVIOUS", "CHANGE"]:
+#             comparison[col] = comparison[col].apply(lambda x: float(f"{x:.2f}"))
+
+#         # Rename columns
+#         comparison.columns = ["PARTNER", "LATEST", "PREVIOUS", "CHANGE"]
+
+#         logger.info(f"{week} Required Hours comparison completed.")
+#         return comparison
+
+#     except Exception as e:
+#         logger.error(f"Error comparing Required Hours for {week}: {e}")
+#         raise
+
 def compare_ReqHours(sheet_previous, sheet_latest, week):
     try:
         logger.info(f"Comparing Required Hours for {week}.")
@@ -422,13 +456,13 @@ def compare_ReqHours(sheet_previous, sheet_latest, week):
         prev_week = sheet_previous[sheet_previous["WeekN"] == week]
         latest_week = sheet_latest[sheet_latest["WeekN"] == week]
 
-        # Group by "PARTNER NAME" and sum Payable Normal Hours
+        # Group by "PARTNER NAME" and compute mean of "% of Hours to Required"
         prev_values = prev_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].mean()
         latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["% of Hours to Required"].mean()
 
         # Merge both datasets
-        comparison = prev_values.merge(
-            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        comparison = latest_values.merge(
+            prev_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
         ).fillna(0)
 
         # Calculate the change
@@ -459,8 +493,8 @@ def compare_pNormalHours(sheet_previous, sheet_latest, week):
         latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Payable Normal Hours"].sum()
 
         # Merge both datasets
-        comparison = prev_values.merge(
-            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        comparison = latest_values.merge(
+            prev_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
         ).fillna(0)
 
         # Calculate the change
@@ -491,8 +525,8 @@ def compare_pBonusHours(sheet_previous, sheet_latest, week):
         latest_values = latest_week.groupby("PARTNER NAME", as_index=False)["Payable Bonus Hours"].sum()
 
         # Merge both datasets
-        comparison = prev_values.merge(
-            latest_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
+        comparison = latest_values.merge(
+            prev_values, on="PARTNER NAME", how="outer", suffixes=("_PREVIOUS", "_LATEST")
         ).fillna(0)
 
         # Calculate the change

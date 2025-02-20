@@ -72,34 +72,34 @@ def main(file_previous, file_latest):
             # diff_UtilizationComp = f"{sum(cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None):.2f}"
 
             # Retrieve values from the 'Week1AcceptRateComp' sheet in the comparison file
-            prev_Accept = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
-            lat_Accept = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
+            lat_Accept = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
+            prev_Accept = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
             diff_Accept = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1AcceptRateComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None]) else "0.00"
 
             # Retrieve values from the 'Week1CancelRateComp' sheet in the comparison file
-            prev_Cancel = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
-            lat_Cancel = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
+            lat_Cancel = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
+            prev_Cancel = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
             diff_Cancel = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1CancelRateComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None]) else "0.00"
 
             # Retrieve values from the 'Week1UtilizationComp' sheet in the comparison file
-            prev_UtilizationComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
-            lat_UtilizationComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
+            lat_UtilizationComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
+            prev_UtilizationComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
             diff_UtilizationComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1UtilizationComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None]) else "0.00"
 
 
             # Retrieve values from the 'Week1PNormalHrsComp' sheet in the comparison file
-            prev_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:,.2f}"
-            lat_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:,.2f}"
+            lat_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:,.2f}"
+            prev_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:,.2f}"
             diff_Week1PNormalHrsComp = f"{sum(cell.value for row in sheet_Week1PNormalHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:,.2f}"
 
             # Retrieve values from the 'Week1PBonusHrsComp' sheet in the comparison file
-            prev_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:,.2f}"
-            lat_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:,.2f}"
+            lat_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None) or 0:,.2f}"
+            prev_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None) or 0:,.2f}"
             diff_Week1PBonusHrsComp = f"{sum(cell.value for row in sheet_Week1PBonusHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None) or 0:,.2f}"
 
             # Retrieve values from the 'Week1ReqHrsComp' sheet in the comparison file
-            prev_Week1ReqHrsComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
-            lat_Week1ReqHrsComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
+            lat_Week1ReqHrsComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=2, max_col=2) for cell in row if cell.value is not None]) else "0.00"
+            prev_Week1ReqHrsComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=3, max_col=3) for cell in row if cell.value is not None]) else "0.00"
             diff_Week1ReqHrsComp = f"{(sum(values) / len(values)):.2f}" if (values := [cell.value for row in sheet_Week1ReqHrsComp.iter_rows(min_row=2, max_row=50, min_col=4, max_col=4) for cell in row if cell.value is not None]) else "0.00"
 
             logger.info(f"Accept Hrs: {prev_Accept} -> {lat_Accept}")
@@ -339,7 +339,7 @@ def wpaste_picture():
                     try:
                         container = ws_dashboard.Shapes(container_name)
                         # container.Width = table_width + 95  # Add 3.35 cm to width
-                        container.Width = table_width - 1  # Add 3.35 cm to width
+                        container.Width = table_width + 1  # Add 3.35 cm to width
                         # container.Height = table_height + 123  # Add 4.33 cm to height
                         container.Height = table_height + 56  # Add 4.33 cm to height
                         logger.info(f"Resized {container_name} to width: {(container.Width)*0.0352778:.2f} cm, height: {(container.Height)*0.0352778:.2f} cm")

@@ -12704,3 +12704,180 @@ Index: []
 2025-02-18 17:29:32,361 - INFO - 'ReqTable' successfully pasted in the Week2ReqHrsComp Sheet.
 2025-02-18 17:29:32,382 - INFO - Resized ReqContainer to width: 10.34 cm, height: 5.15 cm
 2025-02-18 17:29:33,352 - INFO - Data pasted as pictures successfully.
+2025-02-20 15:27:59,994 - INFO - Starting main comparison process.
+2025-02-20 15:27:59,995 - INFO - Loading sheets from the provided Excel files.
+2025-02-20 15:28:00,470 - INFO - Sheets loaded successfully.
+2025-02-20 15:28:00,472 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-20 15:28:00,478 - INFO - Total amount for client UBER WAV TRANSIT: 32802.7812
+2025-02-20 15:28:00,478 - INFO - Total calculated mamount:32802.7812
+2025-02-20 15:28:00,480 - WARNING - No header row found for client MODIVCARE in pr_sheet.
+2025-02-20 15:28:00,480 - INFO - Total amount for client MODIVCARE: 27650.477099999996
+2025-02-20 15:28:00,480 - INFO - Total calculated mamount:27650.477099999996
+2025-02-20 15:28:00,481 - INFO - Comparing Totals between previous and latest values.
+2025-02-20 15:28:00,481 - INFO - Totals comparison completed.
+2025-02-20 15:28:00,481 - INFO - Comparing Hourly Total Revs between previous and latest sheets.
+2025-02-20 15:28:00,484 - INFO - HTOTALREV comparison completed.
+2025-02-20 15:28:00,484 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-20 15:28:00,488 - INFO - Lift Lease comparison completed.
+2025-02-20 15:28:00,488 - INFO - Comparing Lift Lease between previous and latest sheets.
+2025-02-20 15:28:00,491 - INFO - Violation comparison completed.
+2025-02-20 15:28:00,498 - INFO - Comparing Acceptance Rate for Week1.
+2025-02-20 15:28:00,500 - INFO - Week1 Acceptance Rate comparison completed.
+2025-02-20 15:28:00,501 - INFO - Comparing Cancellation Rate for Week1.
+2025-02-20 15:28:00,504 - INFO - Week1 Cancellation Rate comparison completed.
+2025-02-20 15:28:00,504 - INFO - Comparing Utilization% for Week1.
+2025-02-20 15:28:00,507 - INFO - Week1 Utilization% comparison completed.
+2025-02-20 15:28:00,507 - INFO - Comparing Payable Normal Hours for Week1.
+2025-02-20 15:28:00,510 - INFO - Week1 Payable Normal Hours comparison completed.
+2025-02-20 15:28:00,511 - INFO - Comparing Payable Bonus Hours for Week1.
+2025-02-20 15:28:00,513 - INFO - Week1 Payable Bonus Hours comparison completed.
+2025-02-20 15:28:00,514 - INFO - Comparing Required Hours for Week1.
+2025-02-20 15:28:00,517 - INFO - Week1 Required Hours comparison completed.
+2025-02-20 15:28:00,518 - INFO - Comparing Acceptance Rate for Week2.
+2025-02-20 15:28:00,520 - INFO - Week2 Acceptance Rate comparison completed.
+2025-02-20 15:28:00,521 - INFO - Comparing Cancellation Rate for Week2.
+2025-02-20 15:28:00,523 - INFO - Week2 Cancellation Rate comparison completed.
+2025-02-20 15:28:00,524 - INFO - Comparing Utilization% for Week2.
+2025-02-20 15:28:00,527 - INFO - Week2 Utilization% comparison completed.
+2025-02-20 15:28:00,528 - INFO - Comparing Payable Normal Hours for Week2.
+2025-02-20 15:28:00,530 - INFO - Week2 Payable Normal Hours comparison completed.
+2025-02-20 15:28:00,531 - INFO - Comparing Payable Bonus Hours for Week2.
+2025-02-20 15:28:00,533 - INFO - Week2 Payable Bonus Hours comparison completed.
+2025-02-20 15:28:00,534 - INFO - Comparing Required Hours for Week2.
+2025-02-20 15:28:00,536 - INFO - Week2 Required Hours comparison completed.
+2025-02-20 15:28:00,674 - INFO - Applying formatting to sheet: TotalInvoicePayment.
+2025-02-20 15:28:00,675 - INFO - Formatting applied successfully to sheet: TotalInvoicePayment.
+2025-02-20 15:28:00,675 - INFO - Applying formatting to sheet: HTotalRevComparison.
+2025-02-20 15:28:00,676 - INFO - Formatting applied successfully to sheet: HTotalRevComparison.
+2025-02-20 15:28:00,677 - INFO - Applying formatting to sheet: LiftLeaseComparison.
+2025-02-20 15:28:00,678 - INFO - Formatting applied successfully to sheet: LiftLeaseComparison.
+2025-02-20 15:28:00,678 - INFO - Applying formatting to sheet: ViolationComparison.
+2025-02-20 15:28:00,679 - INFO - Formatting applied successfully to sheet: ViolationComparison.
+2025-02-20 15:28:00,679 - INFO - Applying formatting to sheet: Week1AcceptRateComp.
+2025-02-20 15:28:00,681 - INFO - Formatting applied successfully to sheet: Week1AcceptRateComp.
+2025-02-20 15:28:00,681 - INFO - Applying formatting to sheet: Week1CancelRateComp.
+2025-02-20 15:28:00,683 - INFO - Formatting applied successfully to sheet: Week1CancelRateComp.
+2025-02-20 15:28:00,683 - INFO - Applying formatting to sheet: Week1UtilizationComp.
+2025-02-20 15:28:00,684 - INFO - Formatting applied successfully to sheet: Week1UtilizationComp.
+2025-02-20 15:28:00,684 - INFO - Applying formatting to sheet: Week1PNormalHrsComp.
+2025-02-20 15:28:00,685 - INFO - Formatting applied successfully to sheet: Week1PNormalHrsComp.
+2025-02-20 15:28:00,685 - INFO - Applying formatting to sheet: Week1PBonusHrsComp.
+2025-02-20 15:28:00,686 - INFO - Formatting applied successfully to sheet: Week1PBonusHrsComp.
+2025-02-20 15:28:00,686 - INFO - Applying formatting to sheet: Week1ReqHrsComp.
+2025-02-20 15:28:00,687 - INFO - Formatting applied successfully to sheet: Week1ReqHrsComp.
+2025-02-20 15:28:00,687 - INFO - Applying formatting to sheet: Week2AcceptRateComp.
+2025-02-20 15:28:00,689 - INFO - Formatting applied successfully to sheet: Week2AcceptRateComp.
+2025-02-20 15:28:00,689 - INFO - Applying formatting to sheet: Week2CancelRateComp.
+2025-02-20 15:28:00,690 - INFO - Formatting applied successfully to sheet: Week2CancelRateComp.
+2025-02-20 15:28:00,690 - INFO - Applying formatting to sheet: Week2UtilizationComp.
+2025-02-20 15:28:00,691 - INFO - Formatting applied successfully to sheet: Week2UtilizationComp.
+2025-02-20 15:28:00,691 - INFO - Applying formatting to sheet: Week2PNormalHrsComp.
+2025-02-20 15:28:00,693 - INFO - Formatting applied successfully to sheet: Week2PNormalHrsComp.
+2025-02-20 15:28:00,693 - INFO - Applying formatting to sheet: Week2PBonusHrsComp.
+2025-02-20 15:28:00,694 - INFO - Formatting applied successfully to sheet: Week2PBonusHrsComp.
+2025-02-20 15:28:00,694 - INFO - Applying formatting to sheet: Week2ReqHrsComp.
+2025-02-20 15:28:00,695 - INFO - Formatting applied successfully to sheet: Week2ReqHrsComp.
+2025-02-20 15:28:00,812 - INFO - Main comparison process completed successfully. File saved to ComparedResults\DIV2_Tables.xlsx.
+2025-02-20 15:28:00,812 - INFO - VDP_DIV2_0113_0126 FINAL.xlsm + VDP_DIV2_0127_0209 DRAFT.xlsm
+2025-02-20 15:28:03,221 - INFO - Successfully updated color for TextBox 90 with status 'Decreased'.
+2025-02-20 15:28:03,238 - INFO - Successfully updated color for txtHTotalRevDiff with value '7,278.86'.
+2025-02-20 15:28:03,254 - INFO - Successfully updated color for txtLLeaseDiff with value '327.40'.
+2025-02-20 15:28:03,279 - INFO - Successfully updated color for txtViolationsDiff with value '-653.40'.
+2025-02-20 15:28:04,375 - INFO - ComparedResults/Dashboard.xlsm has been successfully updated and saved.
+2025-02-20 15:28:07,424 - INFO - Deleted existing picture: ViolationsTable in Dashboard
+2025-02-20 15:28:07,475 - INFO - Deleted existing picture: HoursTable in Dashboard
+2025-02-20 15:28:07,512 - INFO - Deleted existing picture: LeaseTable in Dashboard
+2025-02-20 15:28:10,743 - INFO - Copied picture from ViolationComparison, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:11,897 - INFO - Table Name: ViolationsTable
+2025-02-20 15:28:12,898 - INFO - 'ViolationsTable' successfully pasted in the ViolationComparison Sheet.
+2025-02-20 15:28:12,918 - INFO - Resized ViolationsContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:13,934 - INFO - Copied picture from HTotalRevComparison, width: 11.11 cm, height: 3.18 cm
+2025-02-20 15:28:15,011 - INFO - Table Name: HoursTable
+2025-02-20 15:28:16,013 - INFO - 'HoursTable' successfully pasted in the HTotalRevComparison Sheet.
+2025-02-20 15:28:16,033 - INFO - Resized HoursContainer to width: 11.15 cm, height: 5.15 cm
+2025-02-20 15:28:17,055 - INFO - Copied picture from LiftLeaseComparison, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:18,133 - INFO - Table Name: LeaseTable
+2025-02-20 15:28:19,135 - INFO - 'LeaseTable' successfully pasted in the LiftLeaseComparison Sheet.
+2025-02-20 15:28:19,155 - INFO - Resized LeaseContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:20,224 - INFO - Data pasted as pictures successfully.
+2025-02-20 15:28:24,542 - INFO - Week VDP_DIV2_0113_0126 FINAL.xlsm + VDP_DIV2_0127_0209 DRAFT.xlsm
+2025-02-20 15:28:25,490 - INFO - Processing ComparedResults/DIV2_Tables.xlsx -> Week1
+2025-02-20 15:28:25,505 - INFO - Processing ComparedResults/DIV2_Tables.xlsx -> Week1
+2025-02-20 15:28:25,507 - INFO - Accept Hrs: 96.49 -> 95.62
+2025-02-20 15:28:25,915 - INFO - Successfully updated color for txtAcceptDiff with value '0.87'.
+2025-02-20 15:28:25,937 - INFO - Successfully updated color for txtCancelDiff with value '-0.89'.
+2025-02-20 15:28:25,956 - INFO - Successfully updated color for txtUtilizationDiff with value '-1.46'.
+2025-02-20 15:28:25,974 - INFO - Successfully updated color for txtPNormalHrsDiff with value '20.53'.
+2025-02-20 15:28:25,992 - INFO - Successfully updated color for txtPBonusHrsDiff with value '36.65'.
+2025-02-20 15:28:26,010 - INFO - Successfully updated color for txtReqHrsDiff with value '0.12'.
+2025-02-20 15:28:26,011 - INFO - Processing ComparedResults/DIV2_Tables.xlsx -> Week2
+2025-02-20 15:28:26,029 - INFO - Processing ComparedResults/DIV2_Tables.xlsx -> Week2
+2025-02-20 15:28:26,031 - INFO - Accept Hrs: 97.85 -> 92.75
+2025-02-20 15:28:26,322 - INFO - Successfully updated color for txtAcceptDiff with value '5.10'.
+2025-02-20 15:28:26,337 - INFO - Successfully updated color for txtCancelDiff with value '-1.48'.
+2025-02-20 15:28:26,349 - INFO - Successfully updated color for txtUtilizationDiff with value '-4.44'.
+2025-02-20 15:28:26,371 - INFO - Successfully updated color for txtPNormalHrsDiff with value '84.71'.
+2025-02-20 15:28:26,384 - INFO - Successfully updated color for txtPBonusHrsDiff with value '-6.28'.
+2025-02-20 15:28:26,401 - INFO - Successfully updated color for txtReqHrsDiff with value '0.03'.
+2025-02-20 15:28:29,282 - INFO - ComparedResults/Dashboard.xlsm has been successfully updated and saved.
+2025-02-20 15:28:32,321 - INFO - Deleted existing picture: AcceptTable in Week1
+2025-02-20 15:28:32,385 - INFO - Deleted existing picture: CancelTable in Week1
+2025-02-20 15:28:32,425 - INFO - Deleted existing picture: UtilizationTable in Week1
+2025-02-20 15:28:32,450 - INFO - Deleted existing picture: NormalTable in Week1
+2025-02-20 15:28:32,462 - INFO - Deleted existing picture: BonusTable in Week1
+2025-02-20 15:28:32,480 - INFO - Deleted existing picture: ReqTable in Week1
+2025-02-20 15:28:32,515 - INFO - Deleted existing picture: AcceptTable in Week2
+2025-02-20 15:28:32,532 - INFO - Deleted existing picture: CancelTable in Week2
+2025-02-20 15:28:32,548 - INFO - Deleted existing picture: UtilizationTable in Week2
+2025-02-20 15:28:32,567 - INFO - Deleted existing picture: NormalTable in Week2
+2025-02-20 15:28:32,583 - INFO - Deleted existing picture: BonusTable in Week2
+2025-02-20 15:28:32,612 - INFO - Deleted existing picture: ReqTable in Week2
+2025-02-20 15:28:35,815 - INFO - Copied picture from Week1AcceptRateComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:36,943 - INFO - Table Name: AcceptTable
+2025-02-20 15:28:37,945 - INFO - 'AcceptTable' successfully pasted in the Week1AcceptRateComp Sheet.
+2025-02-20 15:28:37,970 - INFO - Resized AcceptContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:38,994 - INFO - Copied picture from Week1CancelRateComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:40,074 - INFO - Table Name: CancelTable
+2025-02-20 15:28:41,075 - INFO - 'CancelTable' successfully pasted in the Week1CancelRateComp Sheet.
+2025-02-20 15:28:41,102 - INFO - Resized CancelContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:42,127 - INFO - Copied picture from Week1UtilizationComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:43,204 - INFO - Table Name: UtilizationTable
+2025-02-20 15:28:44,206 - INFO - 'UtilizationTable' successfully pasted in the Week1UtilizationComp Sheet.
+2025-02-20 15:28:44,223 - INFO - Resized UtilizationContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:45,246 - INFO - Copied picture from Week1PNormalHrsComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:46,322 - INFO - Table Name: NormalTable
+2025-02-20 15:28:47,324 - INFO - 'NormalTable' successfully pasted in the Week1PNormalHrsComp Sheet.
+2025-02-20 15:28:47,351 - INFO - Resized NormalContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:48,375 - INFO - Copied picture from Week1PBonusHrsComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:49,456 - INFO - Table Name: BonusTable
+2025-02-20 15:28:50,457 - INFO - 'BonusTable' successfully pasted in the Week1PBonusHrsComp Sheet.
+2025-02-20 15:28:50,476 - INFO - Resized BonusContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:51,503 - INFO - Copied picture from Week1ReqHrsComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:52,584 - INFO - Table Name: ReqTable
+2025-02-20 15:28:53,586 - INFO - 'ReqTable' successfully pasted in the Week1ReqHrsComp Sheet.
+2025-02-20 15:28:53,606 - INFO - Resized ReqContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:54,653 - INFO - Copied picture from Week2AcceptRateComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:55,767 - INFO - Table Name: AcceptTable
+2025-02-20 15:28:56,769 - INFO - 'AcceptTable' successfully pasted in the Week2AcceptRateComp Sheet.
+2025-02-20 15:28:56,791 - INFO - Resized AcceptContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:28:57,819 - INFO - Copied picture from Week2CancelRateComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:28:58,910 - INFO - Table Name: CancelTable
+2025-02-20 15:28:59,912 - INFO - 'CancelTable' successfully pasted in the Week2CancelRateComp Sheet.
+2025-02-20 15:28:59,926 - INFO - Resized CancelContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:29:00,944 - INFO - Copied picture from Week2UtilizationComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:29:02,027 - INFO - Table Name: UtilizationTable
+2025-02-20 15:29:03,029 - INFO - 'UtilizationTable' successfully pasted in the Week2UtilizationComp Sheet.
+2025-02-20 15:29:03,050 - INFO - Resized UtilizationContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:29:04,072 - INFO - Copied picture from Week2PNormalHrsComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:29:05,152 - INFO - Table Name: NormalTable
+2025-02-20 15:29:06,154 - INFO - 'NormalTable' successfully pasted in the Week2PNormalHrsComp Sheet.
+2025-02-20 15:29:06,173 - INFO - Resized NormalContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:29:07,197 - INFO - Copied picture from Week2PBonusHrsComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:29:08,272 - INFO - Table Name: BonusTable
+2025-02-20 15:29:09,274 - INFO - 'BonusTable' successfully pasted in the Week2PBonusHrsComp Sheet.
+2025-02-20 15:29:09,298 - INFO - Resized BonusContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:29:10,323 - INFO - Copied picture from Week2ReqHrsComp, width: 10.37 cm, height: 3.18 cm
+2025-02-20 15:29:11,403 - INFO - Table Name: ReqTable
+2025-02-20 15:29:12,405 - INFO - 'ReqTable' successfully pasted in the Week2ReqHrsComp Sheet.
+2025-02-20 15:29:12,424 - INFO - Resized ReqContainer to width: 10.41 cm, height: 5.15 cm
+2025-02-20 15:29:13,374 - INFO - Data pasted as pictures successfully.
